@@ -121,7 +121,57 @@ Pour signaler un problème de sécurité, écrire à l'adresse indiquée dans la
 
 ## Intégration et déploiement continus
 
-À venir (PortOps).
+Outils validés : ADR 0011 (dépôt de documentation). Rien d'autre n'est utilisé dans le pipeline.
+
+### Flux
+
+```
+branche courte (feat/…, fix/…, docs/…)
+   |  Pull Request vers dev  -> contrôles GitHub Actions + preview Vercel de la PR
+   v
+dev  -> contrôles (push) + preview Vercel « dev » (préproduction)
+   |  Pull Request dev -> main -> mêmes contrôles, obligatoires
+   v
+main -> déploiement de production sur Vercel (merge validé par Arnaud)
+```
+
+Le déploiement est fait par l'intégration Git native de Vercel : aucun jeton Vercel ni secret n'est stocké dans GitHub ou dans le dépôt.
+
+### Contrôles (`.github/workflows/ci.yml`)
+
+Un seul job nommé `checks`, à déclarer comme contrôle obligatoire (required status check) dans la protection de `main` et de `dev`. Il se déclenche sur les Pull Requests vers `dev` et `main` et sur les push vers `dev`. Étapes :
+
+1. `npm ci` (installation figée) ;
+2. `npm run format:check` (Prettier) ;
+3. `npm run lint` (ESLint et `astro check`) ;
+4. `npm run build` (build Astro) ;
+5. `npm audit --omit=dev --audit-level=low` (dépendances de production ; bloquant).
+
+Sécurité du workflow : `permissions: contents: read`, `persist-credentials: false`, annulation des runs obsolètes (`concurrency`), actions officielles `actions/checkout` et `actions/setup-node` épinglées par SHA de commit (version en commentaire). Node est lu dans `.nvmrc`, cache npm activé.
+
+### Dependabot (`.github/dependabot.yml`)
+
+Mises à jour hebdomadaires (lundi) des dépendances `npm` et des actions GitHub (donc des SHA épinglés), Pull Requests ciblant `dev`. Les mises à jour mineures et correctifs des outils de développement sont regroupés en une seule PR ; les dépendances de production et les mises à jour majeures arrivent séparément.
+
+### Vercel et en-têtes (`vercel.json`)
+
+- Branche de production : `main` ; `dev` et les Pull Requests : previews protégées par Vercel Authentication. `SITE_URL` (`https://aadjimon.online`) est défini côté Vercel, en Production.
+- En-têtes de sécurité sur les pages : CSP stricte (aucune ressource tierce, aucun script ni style inline), HSTS (sans `preload`), `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy`, `X-Frame-Options`.
+- Règle séparée pour `/cv/*.pdf` (la CSP `default-src 'none'` est évitée pour ne pas gêner le visionneur de PDF).
+- `/_astro/*` : cache long et immuable (fichiers au nom haché).
+- Toute ressource externe (analytique, police tierce…) imposera de modifier la CSP.
+
+### Lancer les mêmes contrôles en local
+
+```
+npm ci
+npm run format:check
+npm run lint
+npm run build
+npm audit --omit=dev --audit-level=low
+```
+
+Les étapes de configuration à faire dans GitHub, Vercel et chez Wayhost sont décrites dans le dépôt de documentation (`docs/etapes-configuration-github-vercel-wayhost.md`).
 
 ## Licence
 

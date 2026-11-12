@@ -8,6 +8,9 @@ Le format s'inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) 
 
 ### Ajouté
 
+- Pipeline CI GitHub Actions (`checks` : `npm ci`, format, lint, build, `npm audit --omit=dev`), Dependabot (npm et GitHub Actions, vers `dev`) et `vercel.json` (en-têtes de sécurité, CSP stricte, cache des assets).
+- README : section « Intégration et déploiement continus ».
+
 - Fins de ligne LF imposées (`.gitattributes`, `endOfLine` Prettier) pour que le formatage passe sous Windows et en CI.
 
 - Titre de page « Arnaud Adjimon » (FR et EN).
