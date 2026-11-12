@@ -114,7 +114,7 @@ Les boutons « Télécharger mon CV » pointent vers :
 
 ## Sécurité
 
-Rien de confidentiel n'est versionné dans ce dépôt : pas de secret, de clé, de fichier `.env` ni de donnée personnelle superflue. Les images publiées ne contiennent aucune métadonnée (EXIF) et les captures de projets ont leurs données personnelles et commerciales floutées. Le numéro de téléphone n'apparaît nulle part. Les coordonnées affichées (e-mail, LinkedIn, GitHub) sont publiques par choix.
+Rien de confidentiel n'est versionné dans ce dépôt : pas de secret, de clé, de fichier `.env` ni de donnée personnelle superflue. Les images publiées ne contiennent aucune métadonnée (EXIF) et les captures de projets ont leurs données personnelles et commerciales floutées. Le numéro de téléphone n'apparaît pas sur le site ; il figure uniquement dans les CV PDF publiés (`public/cv/`), par décision d'Arnaud. Les coordonnées affichées (e-mail, LinkedIn, GitHub) sont publiques par choix.
 
 Pour signaler un problème de sécurité, écrire à l'adresse indiquée dans la section Contact du site.
 
