@@ -41,7 +41,7 @@ export function initNavSpy(): void {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
         links.forEach((link) => link.removeAttribute('aria-current'));
-        links.get(entry.target.id)?.setAttribute('aria-current', 'true');
+        links.get(entry.target.id)?.setAttribute('aria-current', 'location');
         moveInk();
       });
     },
