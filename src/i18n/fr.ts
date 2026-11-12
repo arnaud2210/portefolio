@@ -9,6 +9,10 @@ export const fr = {
     description:
       "Arnaud Adjimon, développeur back-end Python / Fullstack. Je conçois des APIs et des applications web et mobile, de l'analyse du besoin à la mise en production.",
   },
+  og: {
+    locale: 'fr_FR',
+    imageAlt: 'Arnaud Adjimon, développeur back-end Python / Fullstack',
+  },
   skip: 'Aller au contenu',
   nav: {
     ariaLabel: 'Navigation principale',

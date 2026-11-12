@@ -7,6 +7,10 @@ export const en: Dictionary = {
     description:
       'Arnaud Adjimon, Back-end Python / Full-stack Developer. I design APIs, web and mobile applications, from requirements analysis to production.',
   },
+  og: {
+    locale: 'en_US',
+    imageAlt: 'Arnaud Adjimon, back-end Python / full-stack developer',
+  },
   skip: 'Skip to content',
   nav: {
     ariaLabel: 'Main navigation',
