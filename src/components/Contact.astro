@@ -15,21 +15,21 @@ const channels = [
     icon: 'mail',
     href: `mailto:${site.email}`,
     text: site.email,
-    label: t.contact.emailAria,
+    hint: t.contact.emailHint,
     external: false,
   },
   {
     icon: 'linkedin',
     href: site.linkedin.url,
     text: site.linkedin.handle,
-    label: t.contact.linkedinAria,
+    hint: t.contact.linkedinHint,
     external: true,
   },
   {
     icon: 'github',
     href: site.github.url,
     text: site.github.handle,
-    label: t.contact.githubAria,
+    hint: t.contact.githubHint,
     external: true,
   },
 ] as const;
@@ -43,13 +43,9 @@ const channels = [
       <ul class="contact-list">
         {channels.map((channel) => (
           <li>
-            <a
-              href={channel.href}
-              aria-label={channel.label}
-              rel={channel.external ? 'noopener noreferrer' : undefined}
-            >
+            <a href={channel.href} rel={channel.external ? 'noopener noreferrer' : undefined}>
               <Icon name={channel.icon} />
-              <span>{channel.text}</span>
+              <span>{channel.text}</span> <span class="sr">{channel.hint}</span>
             </a>
           </li>
         ))}

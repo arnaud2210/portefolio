@@ -211,6 +211,9 @@ export const fr = {
     emailAria: 'Envoyer un email à Arnaud',
     linkedinAria: "Profil LinkedIn d'Arnaud Adjimon",
     githubAria: 'Profil GitHub arnaud2210',
+    emailHint: '(email)',
+    linkedinHint: '(profil LinkedIn)',
+    githubHint: '(profil GitHub)',
   },
   footer: {
     role: 'Développeur back-end Python / Fullstack',

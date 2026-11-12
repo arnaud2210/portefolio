@@ -208,6 +208,9 @@ export const en: Dictionary = {
     emailAria: 'Email Arnaud',
     linkedinAria: "Arnaud Adjimon's LinkedIn profile",
     githubAria: "arnaud2210's GitHub profile",
+    emailHint: '(email)',
+    linkedinHint: '(LinkedIn profile)',
+    githubHint: '(GitHub profile)',
   },
   footer: {
     role: 'Back-end Python / Full-stack Developer',

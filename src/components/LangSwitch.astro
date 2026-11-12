@@ -19,7 +19,7 @@ const t = getDictionary(locale);
       href={getRelativeLocaleUrl(code)}
       hreflang={code}
       lang={code}
-      aria-label={t.lang[code]}
+      aria-label={`${code.toUpperCase()} – ${t.lang[code]}`}
       aria-current={code === locale ? 'page' : undefined}
       data-lang-link={code}
     >
