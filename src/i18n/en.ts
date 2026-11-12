@@ -3,7 +3,7 @@ import type { Dictionary } from './fr';
 /** English texts. Same keys as `fr.ts`, enforced by the `Dictionary` type. */
 export const en: Dictionary = {
   meta: {
-    title: 'Arnaud Adjimon - Back-end Python / Full-stack Developer',
+    title: 'Arnaud Adjimon',
     description:
       'Arnaud Adjimon, Back-end Python / Full-stack Developer. I design APIs, web and mobile applications, from requirements analysis to production.',
   },

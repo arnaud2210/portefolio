@@ -5,7 +5,7 @@
  */
 export const fr = {
   meta: {
-    title: 'Arnaud Adjimon - Développeur back-end Python / Fullstack',
+    title: 'Arnaud Adjimon',
     description:
       "Arnaud Adjimon, développeur back-end Python / Fullstack. Je conçois des APIs et des applications web et mobile, de l'analyse du besoin à la mise en production.",
   },
