@@ -1,0 +1,35 @@
+/* Sélecteur de langue (v7) : globe + 2 liens ; langue courante = aria-current="page" */
+.lang {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+.lang .ic {
+  width: 1rem;
+  height: 1rem;
+  margin-right: 2px;
+  color: var(--text-2);
+}
+.lang a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  border-bottom: 2px solid transparent;
+  color: var(--text-2);
+  font: 500 0.875rem var(--font);
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.lang a:hover {
+  color: var(--text);
+}
+.lang a[aria-current='page'] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+.foot-tools .lang {
+  margin-left: 0;
+}

@@ -1,0 +1,89 @@
+/* Parcours : vraie ligne verticale et points de jalon */
+.tl-group + .tl-group {
+  margin-top: 48px;
+}
+.tl-group h3 {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-2);
+  margin-bottom: 8px;
+}
+.tl {
+  position: relative;
+}
+.tl::before {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 28px;
+  bottom: 28px;
+  width: 1px;
+  background: var(--line-strong);
+}
+.tl li {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2px 24px;
+  padding: 16px 0 16px 32px;
+}
+.tl li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: calc(16px + 0.72em);
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 2px solid var(--line-strong);
+  transition: border-color 0.15s;
+}
+.tl li:hover::before {
+  border-color: var(--accent);
+}
+.tl li.current::before {
+  background: var(--accent);
+  border-color: var(--accent);
+  outline: 1px solid var(--accent);
+  outline-offset: 3px;
+}
+.tl .when {
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  font-variant-numeric: tabular-nums;
+}
+.tl .what {
+  font-weight: 500;
+  line-height: 1.45;
+}
+.tl .where,
+.tl .note {
+  display: block;
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  margin-top: 2px;
+}
+.tl .links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  margin-top: 2px;
+  font-weight: 400;
+}
+.tl li:target {
+  scroll-margin-top: calc(var(--head) + 16px);
+}
+@media (min-width: 640px) {
+  .tl li {
+    grid-template-columns: minmax(120px, 12rem) minmax(0, 1fr);
+    padding-left: 36px;
+  }
+}
+@media (min-width: 1024px) {
+  .tl li {
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+}
