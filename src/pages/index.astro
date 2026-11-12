@@ -1,0 +1,32 @@
+---
+// Page racine : redirige vers la langue préférée (scripts/redirect.ts).
+// Sans JS : <noscript> redirige vers le français et deux liens permettent de choisir.
+import '../styles/root.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Base from '../layouts/Base.astro';
+import { defaultLocale, getDictionary, locales } from '../i18n';
+import { site } from '../data/site';
+
+const t = getDictionary(defaultLocale);
+---
+
+<Base locale={defaultLocale} title={t.meta.title} description={t.meta.description}>
+  <noscript slot="head">
+    <meta http-equiv="refresh" content={`0; url=${getRelativeLocaleUrl(defaultLocale)}`} />
+  </noscript>
+  <main class="root">
+    <h1>{site.name}</h1>
+    <ul class="root-langs">
+      {locales.map((code) => (
+        <li>
+          <a href={getRelativeLocaleUrl(code)} hreflang={code} lang={code}>
+            {getDictionary(code).lang[code]}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+  <script>
+    import '../scripts/redirect';
+  </script>
+</Base>

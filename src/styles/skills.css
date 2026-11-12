@@ -1,0 +1,89 @@
+/* Compétences : icône + nom, grille fluide */
+.sk-group + .sk-group {
+  margin-top: 32px;
+}
+.sk-group h3 {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-2);
+  margin-bottom: 12px;
+}
+.chips {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 8.75rem), 1fr));
+  gap: 8px;
+}
+.chips li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  padding: 8px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  color: var(--text);
+  font-size: 0.9375rem;
+  line-height: 1.3;
+  transition: border-color 0.15s;
+}
+.chips .ic {
+  color: var(--text-2);
+  transition: color 0.15s;
+}
+.chips li:hover {
+  border-color: var(--line-strong);
+}
+.chips li:hover .ic {
+  color: var(--accent);
+}
+/* Langues et Notions (v8) : 2 sous-groupes. Langues = pastilles pleines avec badge texte ; Notions = pointillés + texte secondaire (un cran sous les compétences). */
+.sk-pair {
+  margin-top: 32px;
+  display: grid;
+  gap: 32px;
+}
+.sk-pair > .sk-group {
+  margin-top: 0;
+}
+@media (min-width: 640px) {
+  .sk-pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 24px;
+  }
+}
+.code {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  min-width: 28px;
+  height: 24px;
+  padding: 0 4px;
+  border: 1px solid var(--line-strong);
+  border-radius: 6px;
+  color: var(--text-2);
+  font: 600 0.75rem/1 var(--font);
+  letter-spacing: 0.06em;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+.chips li:hover .code {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.lv {
+  display: block;
+  color: var(--text-2);
+  font-size: 0.8125rem;
+  line-height: 1.3;
+}
+.chips-soft li {
+  border-style: dashed;
+  border-color: var(--line-strong);
+  color: var(--text-2);
+}
+.sk-note {
+  margin-top: 10px;
+  color: var(--text-2);
+  font-size: 0.8125rem;
+}

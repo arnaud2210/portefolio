@@ -1,0 +1,342 @@
+/* En-tête : collant, se densifie au défilement */
+/* v8 : le fond est porté par ::before (aucun filtre sur l'en-tête lui-même : un backdrop-filter ferait de lui le cadre du panneau mobile en position fixed).
+   Défilé : fond opaque (repli) ; si backdrop-filter est géré et dès 768 px : fond translucide + flou. ::after = barre de lecture 2 px (--p fixé par le JS, sans animation). */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: transparent;
+  transition: background-color 0.2s;
+}
+.site-header.scrolled {
+  border-bottom-color: var(--line);
+}
+.site-header.scrolled::before {
+  background: var(--bg);
+}
+.site-header::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.site-header.scrolled::after {
+  opacity: 1;
+}
+.menu-open .site-header::after {
+  opacity: 0;
+}
+@supports ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  @media (min-width: 768px) {
+    .site-header.scrolled::before {
+      background: var(--bar);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+    }
+  }
+}
+.header-in {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: var(--head);
+}
+.brand {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.brand:hover {
+  color: var(--text);
+}
+.mono {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  color: var(--text);
+  font: 600 0.75rem/1 var(--font);
+  letter-spacing: 0.02em;
+  transition: background-color 0.15s;
+}
+.brand:hover .mono {
+  background: rgb(var(--accent-rgb) / 0.12);
+}
+.menu-btn {
+  position: relative;
+  z-index: 1;
+  margin-left: auto;
+  display: none;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 10px;
+  background: none;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r);
+  color: var(--text);
+  font: 500 0.9375rem var(--font);
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.menu-btn:hover {
+  border-color: var(--accent);
+}
+.menu-btn .ic {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+.menu-btn[aria-expanded='true'] .l1 {
+  transform: translateY(7px) rotate(45deg);
+}
+.menu-btn[aria-expanded='true'] .l2 {
+  opacity: 0;
+}
+.menu-btn[aria-expanded='true'] .l3 {
+  transform: translateY(-7px) rotate(-45deg);
+}
+.menu-btn path {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    transform 0.2s,
+    opacity 0.2s;
+}
+/* Panneau (v8) : liens + bouton « Me contacter » + langue. Sans JS : rangée sous le nom, qui passe à la ligne. */
+.panel {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0 8px;
+  order: 3;
+  width: 100%;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 4px;
+}
+.nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--text-2);
+  font-size: 0.9375rem;
+  text-decoration: none;
+  border-bottom: 2px solid transparent;
+  transition:
+    color 0.15s,
+    border-color 0.15s;
+}
+.nav a:hover {
+  color: var(--text);
+}
+.nav a[aria-current] {
+  color: var(--text);
+  border-bottom-color: var(--accent);
+}
+.ink {
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    width 0.28s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.2s;
+}
+.nav-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid rgb(var(--accent-rgb) / 0.55);
+  border-radius: var(--r);
+  color: var(--text);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+.nav-cta:hover,
+.nav-cta[aria-current] {
+  background: rgb(var(--accent-rgb) / 0.1);
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+/* Très petits écrans (< 380) : bouton menu réduit à l'icône (aria-label « Menu ») */
+@media (max-width: 379.98px) {
+  .header-in {
+    gap: 8px;
+  }
+  .brand {
+    font-size: 0.9375rem;
+  }
+  .menu-btn {
+    width: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+  .menu-btn span {
+    display: none;
+  }
+}
+/* Mobile (< 768) avec JS : panneau plein écran sous les contrôles de l'en-tête (nom et bouton restent au-dessus, z-index 1).
+   Fermé : visibility:hidden (sorti de l'ordre de tabulation) ; ouverture : fondu + glissement de 8 px. */
+@media (max-width: 767.98px) and (scripting: enabled) {
+  .menu-btn {
+    display: inline-flex;
+  }
+  .panel {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 0;
+    order: 0;
+    width: auto;
+    padding: calc(var(--head) + 12px) var(--gut) 28px;
+    background: var(--bg);
+    overflow-y: auto;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-8px);
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0s 0.2s;
+  }
+  .panel.open {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+  .nav {
+    flex-direction: column;
+    flex-wrap: nowrap;
+    gap: 0;
+  }
+  .nav a {
+    min-height: 56px;
+    padding: 0 14px;
+    border-bottom: 1px solid var(--line);
+    border-left: 2px solid transparent;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+  .nav a[aria-current] {
+    border-left-color: var(--accent);
+  }
+  .nav-cta {
+    margin-top: 24px;
+    min-height: 52px;
+    font-size: 1rem;
+  }
+  .panel .lang {
+    margin: 16px 0 0 -4px;
+  }
+  .menu-open {
+    overflow: hidden;
+  }
+}
+/* Mobile : en-tête opaque et filet permanent, avec ou sans JS (le fond translucide est réservé au bureau) */
+@media (max-width: 767.98px) {
+  .site-header::before {
+    background: var(--bg);
+  }
+  .site-header {
+    border-bottom-color: var(--line);
+  }
+}
+@media (min-width: 768px) {
+  .header-in {
+    gap: 16px;
+  }
+  .panel {
+    order: 0;
+    width: auto;
+    margin-left: auto;
+    flex-wrap: nowrap;
+    gap: 0 clamp(8px, 1.4vw, 16px);
+  }
+  .nav {
+    position: relative;
+    flex-wrap: nowrap;
+  }
+  .nav a {
+    padding: 0 clamp(8px, 1.2vw, 14px);
+  }
+  .ink {
+    display: block;
+  }
+  .has-ink a[aria-current] {
+    border-bottom-color: transparent;
+  }
+  .lang {
+    margin-left: 0;
+  }
+  .site-header.scrolled {
+    --head: 56px;
+  }
+}
+/* 768-899 px (FR, libellés longs) : rangée resserrée pour tenir en une ligne (nom + 3 liens + bouton + langue) */
+@media (min-width: 768px) and (max-width: 899.98px) {
+  .header-in {
+    gap: 10px;
+  }
+  .panel {
+    gap: 0 6px;
+  }
+  .nav a {
+    padding: 0 7px;
+  }
+  .nav-cta {
+    padding: 0 12px;
+  }
+  .panel .lang .ic {
+    display: none;
+  }
+  .panel .lang a {
+    min-width: 40px;
+  }
+}

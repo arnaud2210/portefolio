@@ -1,0 +1,48 @@
+---
+import '../styles/hero.css';
+import { Picture } from 'astro:assets';
+import photo from '../assets/photo-arnaud.jpg';
+import { getDictionary, type Locale } from '../i18n';
+import { cvPath, sections, site } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section class="hero" id={sections.home}>
+  <div class="wrap hero-in">
+    <div class="hero-title">
+      <h1>{site.name}</h1>
+      <p class="role">{t.hero.role}</p>
+    </div>
+    <p class="pitch">{t.hero.pitch}</p>
+    <div class="cta">
+      <a class="btn" href={`#${sections.projects}`}>
+        {t.hero.seeProjects}{' '}
+        <span class="arr" aria-hidden="true">
+          →
+        </span>
+      </a>
+      <a class="link-cv" href={cvPath[locale]} download>
+        {t.hero.cv}
+      </a>
+    </div>
+    <div class="photo">
+      <Picture
+        src={photo}
+        alt={t.hero.photoAlt}
+        formats={['avif']}
+        fallbackFormat="webp"
+        widths={[160, 280, 320, 640]}
+        sizes="(min-width: 768px) 320px, 140px"
+        loading="eager"
+        fetchpriority="high"
+        class="photo-img"
+      />
+    </div>
+  </div>
+</section>

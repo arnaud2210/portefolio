@@ -1,0 +1,47 @@
+---
+import { getDictionary, type Locale } from '../i18n';
+import { formatRange, type CareerEntry } from '../data/career';
+import { getProjectShortName } from '../data/projects';
+
+interface Props {
+  locale: Locale;
+  entries: CareerEntry[];
+}
+
+const { locale, entries } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<ol class="tl">
+  {entries.map((entry) => {
+    const texts = t.career.entries[entry.id];
+    return (
+      <li
+        class:list={{ current: entry.current }}
+        id={entry.anchor ? `t-${entry.id}` : undefined}
+        aria-current={entry.current ? 'date' : undefined}
+      >
+        <span class="when">{formatRange(entry, t.career.present)}</span>
+        <span class="what">
+          {texts.what}
+          <span class="where">{texts.where}</span>
+          <span class="note">{texts.note}</span>
+          {entry.projects && (
+            <span class="links">
+              {entry.projects.map((project) => (
+                <a class="ctx" href={`#p-${project}`}>
+                  <span>
+                    <span class="k">{t.career.projectLabel}</span> {getProjectShortName(project)}
+                  </span>{' '}
+                  <span class="arr" aria-hidden="true">
+                    →
+                  </span>
+                </a>
+              ))}
+            </span>
+          )}
+        </span>
+      </li>
+    );
+  })}
+</ol>

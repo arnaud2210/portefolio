@@ -1,0 +1,47 @@
+/* Tokens de design : piste D « Sobre », thème bleu nuit (seul thème du site).
+   Référence : design/tokens-piste-d.md. Approche mobile d'abord, breakpoints 480 / 768 / 1024 / 1440. */
+:root {
+  /* Couleurs */
+  --bg: #0f1b2d;
+  --surface: #16243a;
+  --line: #22324a;
+  --line-strong: #30425e;
+  --text: #e8ebef;
+  --text-2: #a3b0c2;
+  --accent: #5bc0eb;
+  --accent-hover: #8fd6f5;
+  --accent-rgb: 91 192 235; /* teintes d'accent translucides : rgb(var(--accent-rgb) / .1) */
+  --bar: rgb(15 27 45 / 0.88); /* en-tête défilé, translucide */
+  --veil: rgb(5 11 21 / 0.8); /* voile derrière le dialog */
+  --shot-veil: rgb(15 27 45 / 0.32); /* voile au survol d'une capture */
+
+  /* Typographie */
+  --font: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Formes et mise en page */
+  --r: 10px;
+  --col: 1120px;
+  --gut: clamp(16px, 4vw, 40px);
+  --sec: clamp(44px, 7vw, 112px);
+  --label: clamp(140px, 16vw, 200px);
+  --gap: clamp(20px, 4vw, 64px);
+  --head: 56px;
+}
+
+@media (min-width: 768px) {
+  :root {
+    --head: 64px;
+  }
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --label: 200px;
+  }
+}
+
+@media (min-width: 1440px) {
+  :root {
+    --col: 1200px;
+  }
+}

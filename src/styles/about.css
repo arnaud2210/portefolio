@@ -1,0 +1,4 @@
+.about p {
+  max-width: 44rem;
+  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+}

@@ -1,0 +1,16 @@
+---
+import { lineIcons, type IconName } from './icon-names';
+
+interface Props {
+  name: IconName;
+}
+
+const { name } = Astro.props;
+const isLine = (lineIcons as readonly string[]).includes(name);
+// Le tracé LinkedIn (Bootstrap Icons) est dessiné sur une grille de 16.
+const viewBox = name === 'linkedin' ? '0 0 16 16' : '0 0 24 24';
+---
+
+<svg class:list={['ic', { ln: isLine }]} viewBox={viewBox} aria-hidden="true" focusable="false">
+  <use href={`#i-${name}`}></use>
+</svg>

@@ -1,0 +1,55 @@
+---
+import '../styles/contact.css';
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+import { sections, site } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const channels = [
+  {
+    icon: 'mail',
+    href: `mailto:${site.email}`,
+    text: site.email,
+    hint: t.contact.emailHint,
+    external: false,
+  },
+  {
+    icon: 'linkedin',
+    href: site.linkedin.url,
+    text: site.linkedin.handle,
+    hint: t.contact.linkedinHint,
+    external: true,
+  },
+  {
+    icon: 'github',
+    href: site.github.url,
+    text: site.github.handle,
+    hint: t.contact.githubHint,
+    external: true,
+  },
+] as const;
+---
+
+<section id={sections.contact}>
+  <div class="wrap split">
+    <h2>{t.contact.title}</h2>
+    <div>
+      <p class="contact-lead">{t.contact.lead}</p>
+      <ul class="contact-list">
+        {channels.map((channel) => (
+          <li>
+            <a href={channel.href} rel={channel.external ? 'noopener noreferrer' : undefined}>
+              <Icon name={channel.icon} />
+              <span>{channel.text}</span> <span class="sr">{channel.hint}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </div>
+</section>

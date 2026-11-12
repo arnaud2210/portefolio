@@ -24,3 +24,11 @@ Thumbs.db
 .vscode/
 .idea/
 *.log
+
+# Identifiants et certificats (ne jamais versionner)
+*.pfx
+*.p12
+*.crt
+credentials*.json
+service-account*.json
+.npmrc.local

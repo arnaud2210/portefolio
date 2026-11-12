@@ -1,0 +1,45 @@
+/* Contact : canaux avec icône */
+.contact-lead {
+  font-size: clamp(1.375rem, 1rem + 1.8vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  max-width: 30rem;
+}
+.contact-list {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px 28px;
+}
+.contact-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 48px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.15s;
+}
+.contact-list .ic {
+  width: 1.375rem;
+  height: 1.375rem;
+  color: var(--text-2);
+  transition: color 0.15s;
+}
+.contact-list span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.contact-list a:hover,
+.contact-list a:hover .ic,
+.contact-list a:focus-visible .ic {
+  color: var(--accent);
+}
+@media (min-width: 768px) {
+  .contact-list {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}

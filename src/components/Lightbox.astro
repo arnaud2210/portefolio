@@ -1,0 +1,31 @@
+---
+import Icon from './Icon.astro';
+import type { Dictionary } from '../i18n';
+
+interface Props {
+  texts: Dictionary['projects']['showcase']['lightbox'];
+}
+
+const { texts } = Astro.props;
+---
+
+<dialog class="lightbox" id="lightbox" aria-labelledby="lb-title">
+  <div class="lb-bar">
+    <p id="lb-title">{texts.defaultTitle}</p>
+    <div class="lb-ctrl">
+      <button type="button" class="lb-nav" data-dir="-1" aria-label={texts.previous}>
+        &larr;
+      </button>
+      <button type="button" class="lb-nav" data-dir="1" aria-label={texts.next}>
+        &rarr;
+      </button>
+      <button type="button" class="lb-close" aria-label={texts.close}>
+        <Icon name="x" />
+        <span>{texts.close}</span>
+      </button>
+    </div>
+  </div>
+  <div class="lb-img">
+    <img id="lb-img" alt="" />
+  </div>
+</dialog>

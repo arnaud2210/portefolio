@@ -1,0 +1,29 @@
+---
+import '../styles/lang-switch.css';
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Icon from './Icon.astro';
+import { getDictionary, locales, type Locale } from '../i18n';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<div class="lang" role="group" aria-label={t.lang.groupLabel}>
+  <Icon name="globe" />
+  {locales.map((code) => (
+    <a
+      href={getRelativeLocaleUrl(code)}
+      hreflang={code}
+      lang={code}
+      aria-label={`${code.toUpperCase()} – ${t.lang[code]}`}
+      aria-current={code === locale ? 'page' : undefined}
+      data-lang-link={code}
+    >
+      {code.toUpperCase()}
+    </a>
+  ))}
+</div>

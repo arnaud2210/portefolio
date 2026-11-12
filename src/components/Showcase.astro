@@ -1,0 +1,100 @@
+---
+import { Picture, getImage } from 'astro:assets';
+import Icon from './Icon.astro';
+import vitrine from '../assets/vitrine.jpg';
+import catalogue from '../assets/catalogue.jpg';
+import commandes from '../assets/commandes.jpg';
+import tableauDeBord from '../assets/tableau-de-bord.jpg';
+import type { ImageMetadata } from 'astro';
+import type { Dictionary } from '../i18n';
+import { featuredProject } from '../data/projects';
+
+interface Props {
+  texts: Dictionary['projects']['showcase'];
+}
+
+const { texts } = Astro.props;
+
+const web = { key: 'vitrine', image: vitrine } as const;
+const phones = [
+  { key: 'catalogue', image: catalogue },
+  { key: 'commandes', image: commandes },
+  { key: 'tableauDeBord', image: tableauDeBord },
+] as const;
+
+// Version agrandie (WebP, taille d'origine), chargée seulement à l'ouverture du dialog.
+async function withFull<T extends { image: ImageMetadata }>(shot: T) {
+  const full = await getImage({ src: shot.image, format: 'webp', quality: 85 });
+  return { ...shot, full };
+}
+
+const webShot = await withFull(web);
+const phoneShots = await Promise.all(phones.map(withFull));
+---
+
+<div class="showcase">
+  <figure class="sc-web">
+    <div class="browser">
+      <div class="browser-bar" aria-hidden="true">
+        <i></i>
+        <i></i>
+        <i></i>
+        <span class="url">{featuredProject.domain}</span>
+      </div>
+      <button
+        type="button"
+        class="shot"
+        aria-haspopup="dialog"
+        data-cap={texts.shots[webShot.key].caption}
+        data-full-src={webShot.full.src}
+        data-full-width={webShot.full.attributes.width}
+        data-full-height={webShot.full.attributes.height}
+      >
+        <span class="zoom">
+          <Icon name="maximize" />
+          <span class="zoom-t">{texts.enlarge}</span>
+        </span>
+        <Picture
+          src={webShot.image}
+          alt={texts.shots[webShot.key].alt}
+          formats={['avif']}
+          fallbackFormat="webp"
+          widths={[480, 800, 1200, 1600]}
+          sizes="(min-width: 1024px) 640px, calc(100vw - 64px)"
+        />
+      </button>
+    </div>
+    <figcaption>{texts.webCaption}</figcaption>
+  </figure>
+  <figure class="sc-mob">
+    <ul class="phones" role="group" aria-label={texts.phonesAria}>
+      {phoneShots.map((shot) => (
+        <li>
+          <button
+            type="button"
+            class="shot phone"
+            aria-haspopup="dialog"
+            data-cap={texts.shots[shot.key].caption}
+            data-full-src={shot.full.src}
+            data-full-width={shot.full.attributes.width}
+            data-full-height={shot.full.attributes.height}
+          >
+            <span class="zoom">
+              <Icon name="maximize" />
+              <span class="zoom-t">{texts.enlarge}</span>
+            </span>
+            <Picture
+              src={shot.image}
+              alt={texts.shots[shot.key].alt}
+              formats={['avif']}
+              fallbackFormat="webp"
+              widths={[200, 400, 600]}
+              sizes="(min-width: 1024px) 200px, 260px"
+            />
+          </button>
+        </li>
+      ))}
+    </ul>
+    <figcaption>{texts.mobileCaption}</figcaption>
+  </figure>
+</div>

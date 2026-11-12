@@ -1,0 +1,21 @@
+/* Page racine (repli sans JS) : titre et choix de langue, centrés. */
+.root {
+  display: grid;
+  min-height: 100dvh;
+  place-content: center;
+  gap: 24px;
+  padding: var(--gut);
+  text-align: center;
+}
+
+.root-langs {
+  display: flex;
+  justify-content: center;
+  gap: 8px 24px;
+}
+
+.root-langs a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
