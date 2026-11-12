@@ -74,14 +74,14 @@
   border: 0;
   background: none;
   color: inherit;
-  cursor: zoom-in;
+  cursor: default;
 }
 .shot img {
   display: block;
   width: 100%;
   height: auto;
 }
-/* Agrandissement (v7) : voile + badge « Agrandir » (Lucide maximize-2). Badge fond opaque : contraste indépendant de l'image.
+/* Agrandissement (v7), uniquement si le JavaScript est actif (sinon les vignettes restent de simples images) : voile + badge « Agrandir » (Lucide maximize-2). Badge fond opaque : contraste indépendant de l'image.
    Tactile / sans survol : badge permanent, icône seule en petit dans le coin bas droit. Souris : voile + badge avec texte au survol et au focus clavier. */
 .shot::after {
   content: '';
@@ -93,11 +93,11 @@
   pointer-events: none;
 }
 .zoom {
+  display: none;
   position: absolute;
   right: 8px;
   bottom: 8px;
   z-index: 1;
-  display: inline-flex;
   align-items: center;
   gap: 6px;
   padding: 5px;
@@ -121,7 +121,15 @@
   clip-path: inset(50%);
   white-space: nowrap;
 }
-@media (hover: hover) {
+@media (scripting: enabled) {
+  .shot {
+    cursor: zoom-in;
+  }
+  .zoom {
+    display: inline-flex;
+  }
+}
+@media (hover: hover) and (scripting: enabled) {
   .zoom {
     opacity: 0;
     padding: 6px 10px 6px 8px;
