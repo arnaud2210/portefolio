@@ -1,0 +1,50 @@
+/** Icônes à trait (Lucide) : rendues avec la classe `.ln` (stroke au lieu de fill). */
+export const lineIcons = [
+  'mail',
+  'blocks',
+  'up-right',
+  'arrow-up',
+  'x',
+  'maximize',
+  'globe',
+  'shield',
+  'api',
+  'sync',
+  'terminal',
+  'bot',
+  'uml',
+] as const;
+
+/** Icônes pleines (Simple Icons, Bootstrap Icons). */
+export const fillIcons = [
+  'python',
+  'go',
+  'fastapi',
+  'flask',
+  'django',
+  'angular',
+  'react',
+  'bootstrap',
+  'mongodb',
+  'postgresql',
+  'mysql',
+  'mariadb',
+  'docker',
+  'linux',
+  'gitlab',
+  'openstack',
+  'github',
+  'telegram',
+  'whatsapp',
+  'openai',
+  'claude',
+  'pytest',
+  'owasp',
+  'trivy',
+  'linkedin',
+  'java',
+  'springboot',
+  'discord',
+] as const;
+
+export type IconName = (typeof lineIcons)[number] | (typeof fillIcons)[number];
