@@ -2,7 +2,7 @@
 
 Portfolio d'une page, bilingue (français / anglais), d'Arnaud Adjimon, développeur back-end Python / Fullstack. Il présente son profil, ses projets, son parcours et ses compétences, et permet de le contacter.
 
-Site statique construit avec [Astro](https://astro.build), sans framework d'interface et sans service tiers à l'exécution.
+Site statique construit avec [Astro](https://astro.build), sans service tiers à l'exécution.
 
 ## Aperçu
 
@@ -13,16 +13,15 @@ Site statique construit avec [Astro](https://astro.build), sans framework d'inte
 
 ## Technologies et justification
 
-| Choix                                                  | Pourquoi                                                                                                                                       |
-| ------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Astro, sortie statique** (`output: 'static'`)        | Génère du HTML pur : rapide, sans serveur, hébergeable n'importe où (Vercel, Netlify, GitHub Pages, hébergeur dédié). Peu de JavaScript livré. |
-| **Routing i18n natif d'Astro**                         | Une page statique par langue (`/fr/`, `/en/`), `hreflang` et `<html lang>` corrects, sans bibliothèque de traduction.                          |
-| **JavaScript vanilla en modules TypeScript**           | Les interactions sont simples (quelques dizaines de lignes par module) : aucune dépendance d'exécution n'est justifiée.                        |
-| **TypeScript strict**                                  | Les dictionnaires FR et EN partagent le même type : une clé manquante dans une langue fait échouer la vérification.                            |
-| **Inter auto-hébergée** (`@fontsource-variable/inter`) | Pas de requête vers un CDN de polices (vie privée, performance, CSP). Seuls les sous-ensembles latin et latin étendu sont déclarés.            |
-| **`astro:assets`**                                     | Images converties en AVIF / WebP aux tailles utiles (`srcset`), dimensions explicites, métadonnées retirées à la sortie.                       |
-| **CSS natif avec variables**                           | Pas de framework CSS ni de préprocesseur : les tokens de design vivent dans `src/styles/tokens.css`.                                           |
-| **Pas de framework UI**                                | Composants `.astro` uniquement : rendu côté build, aucun runtime côté navigateur.                                                              |
+| Choix                                                  | Pourquoi                                                                                                                                              |
+| ------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Astro, sortie statique** (`output: 'static'`)        | Génère du HTML pur : rapide, sans serveur, hébergeable n'importe où (Vercel, Netlify, GitHub Pages, hébergeur dédié). Peu de JavaScript livré.        |
+| **Routing i18n natif d'Astro**                         | Une page statique par langue (`/fr/`, `/en/`), `hreflang` et `<html lang>` corrects, sans bibliothèque de traduction.                                 |
+| **JavaScript vanilla en modules TypeScript**           | Pas de framework d'interface : les interactions sont simples (quelques dizaines de lignes par module), aucune dépendance d'exécution n'est justifiée. |
+| **TypeScript strict**                                  | Les dictionnaires FR et EN partagent le même type : une clé manquante dans une langue fait échouer la vérification.                                   |
+| **Inter auto-hébergée** (`@fontsource-variable/inter`) | Pas de requête vers un CDN de polices (vie privée, performance, CSP). Seuls les sous-ensembles latin et latin étendu sont déclarés.                   |
+| **`astro:assets`**                                     | Images converties en AVIF / WebP aux tailles utiles (`srcset`), dimensions explicites, métadonnées retirées à la sortie.                              |
+| **CSS natif avec variables**                           | Pas de framework CSS ni de préprocesseur : les tokens de design vivent dans `src/styles/tokens.css`.                                                  |
 
 ### Dépendances
 
@@ -44,13 +43,14 @@ Les versions exactes sont figées par `package-lock.json` (installation reproduc
 - **i18n** : tous les textes sont dans `src/i18n/fr.ts` et `src/i18n/en.ts` (mêmes clés, typées). Les composants ne contiennent aucun texte en dur. Les données non traduisibles (liens, identifiants, noms de technologies, icônes) sont dans `src/data/`.
 - **Choix de langue** : la page racine lit la langue mémorisée (`localStorage`, avec `try/catch`), sinon `navigator.language` (français si la langue commence par `fr`, anglais sinon), puis redirige. Arriver directement sur `/fr/` ou `/en/` ne redirige jamais. Un clic sur le sélecteur de langue mémorise le choix. Sans JavaScript : la racine propose deux liens et redirige vers `/fr/` via `<noscript>`.
 - **Thème** : bleu nuit uniquement, valeurs dans `src/styles/tokens.css`. Aucune couleur n'est écrite en dur ailleurs dans le CSS.
-- **Composants** : un composant par section (`Hero`, `About`, `Projects`, `Career`, `Skills`, `Contact`, `Footer`) et quelques briques (`Icon`, `TagList`, `Timeline`, `Showcase`, `Lightbox`, `LangSwitch`). Les styles de composant sont dans `src/styles/`.
+- **Composants** : un composant par section (`Hero`, `About`, `Projects`, `Career`, `Skills`, `Contact`) plus `Header` et `Footer`, et des briques (`FeaturedProject`, `OtherProject`, `Showcase`, `Lightbox`, `Timeline`, `TagList`, `LangSwitch`, `Icon`, `Sprite`). Composants `.astro` uniquement : rendu au build. Les styles de composant sont dans `src/styles/`.
 - **Icônes** : sprite SVG inline (`src/components/Sprite.astro`) appelé par `<Icon name="…" />`.
 - **Images** : sources dans `src/assets/`, optimisées au build. L'agrandissement des captures charge une version WebP pleine taille uniquement à l'ouverture.
 - **Sécurité des ressources** : aucun script ni style inline généré par le site (feuilles de style et scripts toujours externes), donc compatible avec une CSP stricte. Liens externes en `rel="noopener noreferrer"`.
 - **Pas de suivi** : aucun outil d'analyse, aucun cookie, aucune ressource tierce chargée à l'exécution.
 - **Accessibilité** : contrastes WCAG AA, navigation clavier, focus visible, lien d'évitement, `prefers-reduced-motion` respecté, menu mobile avec focus piégé.
-- **Hébergement** : prévu chez Wayhost (détails à venir). Le site reste déployable sur tout hébergeur statique.
+- **Hébergement** : prévu chez Wayhost (détails à venir). Le site est servi à la racine du domaine : les chemins sont donc absolus (`/favicon.svg`, `/cv/…`). Un déploiement dans un sous-dossier demanderait de configurer `base` dans Astro et d'adapter ces chemins. `SITE_URL` doit être défini au build de production (voir plus bas).
+- **Limite connue du menu mobile** : le menu est replié par une feuille de style conditionnée à `(scripting: enabled)`. Si le JavaScript est actif mais que le bundle ne se charge pas (réseau coupé en cours de chargement), le bouton du menu ne répond pas. Risque faible, accepté.
 
 ## Structure des dossiers
 
@@ -58,7 +58,7 @@ Les versions exactes sont figées par `package-lock.json` (installation reproduc
 .
 ├── astro.config.mjs        Configuration Astro (statique, i18n)
 ├── eslint.config.js        Configuration ESLint
-├── public/                 Fichiers servis tels quels (favicon, et plus tard cv/)
+├── public/                 Fichiers servis tels quels (favicon, cv/)
 ├── src/
 │   ├── assets/             Images sources (optimisées au build)
 │   ├── components/         Composants .astro (sections, briques, sprite d'icônes)
@@ -76,7 +76,7 @@ Les versions exactes sont figées par `package-lock.json` (installation reproduc
 
 ## Prérequis
 
-- Node.js 22.23 ou plus récent (exigence d'Astro 7) et npm.
+- Node.js 22.23.4 ou plus récent (exigence d'Astro 7, aligné sur `engines` de `package.json` ; `.nvmrc` fourni) et npm.
 
 ## Commandes
 
@@ -97,12 +97,12 @@ npm run format:check  # vérifie le formatage sans modifier
 
 ## CV (PDF)
 
-Les boutons « Télécharger mon CV » pointent vers :
+Les boutons « Télécharger mon CV » servent le CV de la langue de la page :
 
 - `/cv/arnaud-adjimon-cv-fr.pdf` (page française),
 - `/cv/arnaud-adjimon-cv-en.pdf` (page anglaise).
 
-**Aucun PDF n'est versionné pour l'instant** : les liens renvoient donc une erreur 404 tant que les fichiers ne sont pas déposés dans `public/cv/`. Ils seront ajoutés une fois la version destinée au public validée par Arnaud.
+Les deux PDF sont versionnés dans `public/cv/` et publiés tels quels. Ils contiennent le numéro de téléphone (décision d'Arnaud) ; celui-ci ne figure jamais dans les pages HTML.
 
 ## Conventions
 

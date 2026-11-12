@@ -7,7 +7,7 @@ export const site = {
   github: { url: 'https://github.com/arnaud2210', handle: 'arnaud2210' },
 } as const;
 
-/** Les PDF sont déposés dans `public/cv/` (hors dépôt tant que le CV n'est pas validé). */
+/** CV versionnés dans `public/cv/` (publiés avec le téléphone, décision d'Arnaud) ; la page sert celui de sa langue. */
 export const cvPath = {
   fr: '/cv/arnaud-adjimon-cv-fr.pdf',
   en: '/cv/arnaud-adjimon-cv-en.pdf',
