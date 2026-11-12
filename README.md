@@ -49,7 +49,7 @@ Les versions exactes sont figées par `package-lock.json` (installation reproduc
 - **Sécurité des ressources** : aucun script ni style inline généré par le site (feuilles de style et scripts toujours externes), donc compatible avec une CSP stricte. Liens externes en `rel="noopener noreferrer"`.
 - **Pas de suivi** : aucun outil d'analyse, aucun cookie, aucune ressource tierce chargée à l'exécution.
 - **Accessibilité** : contrastes WCAG AA, navigation clavier, focus visible, lien d'évitement, `prefers-reduced-motion` respecté, menu mobile avec focus piégé.
-- **Hébergement** : prévu chez Wayhost (détails à venir). Le site est servi à la racine du domaine : les chemins sont donc absolus (`/favicon.svg`, `/cv/…`). Un déploiement dans un sous-dossier demanderait de configurer `base` dans Astro et d'adapter ces chemins. `SITE_URL` doit être défini au build de production (voir plus bas).
+- **Hébergement** : sur Vercel, avec le nom de domaine `aadjimon.online` acheté chez Wayhost. Le site est servi à la racine du domaine : les chemins sont donc absolus (`/favicon.svg`, `/cv/…`). Un déploiement dans un sous-dossier demanderait de configurer `base` dans Astro et d'adapter ces chemins. `SITE_URL` vaut par défaut `https://aadjimon.online` (voir plus bas).
 - **Limite connue du menu mobile** : le menu est replié par une feuille de style conditionnée à `(scripting: enabled)`. Si le JavaScript est actif mais que le bundle ne se charge pas (réseau coupé en cours de chargement), le bouton du menu ne répond pas. Risque faible, accepté.
 
 ## Structure des dossiers
@@ -93,7 +93,7 @@ npm run format:check  # vérifie le formatage sans modifier
 
 ### Variable d'environnement
 
-`SITE_URL` (facultative, par exemple `https://exemple.fr`) : lue à la compilation pour produire des URL absolues dans les balises `hreflang` et `canonical`. Sans elle, les liens sont relatifs. À définir pour le build de production.
+`SITE_URL` (facultative, défaut `https://aadjimon.online`) : lue à la compilation pour produire des URL absolues dans les balises `hreflang` et `canonical`. Elle peut être surchargée par une variable d'environnement Vercel. Les liens internes restent relatifs à la racine, donc les déploiements de prévisualisation Vercel fonctionnent ; seules ces balises utilisent le domaine.
 
 ## CV (PDF)
 

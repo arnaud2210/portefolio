@@ -8,6 +8,8 @@ Le format s'inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) 
 
 ### Ajouté
 
+- Titre de page « Arnaud Adjimon » (FR et EN).
+- Domaine `aadjimon.online` (hébergement Vercel, domaine chez Wayhost) : `site` Astro vaut `SITE_URL` ou `https://aadjimon.online` par défaut ; `canonical` et `hreflang` absolus.
 - Projet Astro statique avec TypeScript strict, ESLint, Prettier et vérification des types.
 - Routing i18n `/fr/` et `/en/`, page racine qui redirige vers la langue préférée (choix mémorisé), balises `hreflang`.
 - Dictionnaires `fr.ts` et `en.ts` typés ; aucun texte en dur dans les composants.

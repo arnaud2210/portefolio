@@ -1,8 +1,8 @@
 import { defineConfig } from 'astro/config';
 
-// SITE_URL (ex. https://exemple.fr) est lue à la compilation : elle sert aux URL
-// absolues des balises hreflang et canonical. Sans elle, les liens restent relatifs.
-const site = process.env.SITE_URL || undefined;
+// SITE_URL (surchargeable, ex. pour un déploiement de test) est lue à la compilation : elle sert
+// aux URL absolues des balises hreflang et canonical. Par défaut : le domaine de production.
+const site = process.env.SITE_URL || 'https://aadjimon.online';
 
 export default defineConfig({
   site,
