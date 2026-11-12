@@ -1,0 +1,67 @@
+---
+import '../styles/skills.css';
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+import { notions, skillGroups, spokenLanguages } from '../data/skills';
+import { sections } from '../data/site';
+import type { StackItem } from '../data/stack';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const name = (item: StackItem) => item.label ?? (item.term ? t.terms[item.term] : '');
+---
+
+<section id={sections.skills}>
+  <div class="wrap split">
+    <h2>{t.skills.title}</h2>
+    <div>
+      {skillGroups.map((group) => (
+        <div class="sk-group">
+          <h3>{t.skills.groups[group.id]}</h3>
+          <ul class="chips">
+            {group.items.map((item) => (
+              <li>
+                {item.icon && <Icon name={item.icon} />}
+                {name(item)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ))}
+      <div class="sk-pair">
+        <div class="sk-group">
+          <h3>{t.skills.languagesTitle}</h3>
+          <ul class="chips chips-lang">
+            {spokenLanguages.map((language) => (
+              <li>
+                <span class="code" aria-hidden="true">
+                  {language.code}
+                </span>
+                <span>
+                  {t.skills.languages[language.id].name}{' '}
+                  <small class="lv">{t.skills.languages[language.id].level}</small>
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="sk-group">
+          <h3>{t.skills.notionsTitle}</h3>
+          <ul class="chips chips-soft">
+            {notions.map((item) => (
+              <li>
+                {item.icon && <Icon name={item.icon} />}
+                {name(item)}
+              </li>
+            ))}
+          </ul>
+          <p class="sk-note">{t.skills.notionsNote}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

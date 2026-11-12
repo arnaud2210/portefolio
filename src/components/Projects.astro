@@ -1,0 +1,31 @@
+---
+import '../styles/projects.css';
+import FeaturedProject from './FeaturedProject.astro';
+import Lightbox from './Lightbox.astro';
+import OtherProject from './OtherProject.astro';
+import { getDictionary, type Locale } from '../i18n';
+import { otherProjects } from '../data/projects';
+import { sections } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section id={sections.projects}>
+  <div class="wrap split">
+    <h2>{t.projects.title}</h2>
+    <div>
+      <FeaturedProject locale={locale} />
+      <Lightbox texts={t.projects.showcase.lightbox} />
+      <div class="others">
+        {otherProjects.map((project) => (
+          <OtherProject locale={locale} project={project} />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

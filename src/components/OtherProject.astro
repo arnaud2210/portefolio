@@ -1,0 +1,56 @@
+---
+import Icon from './Icon.astro';
+import TagList from './TagList.astro';
+import { fill, getDictionary, type Locale } from '../i18n';
+import { formatRange, getEntry } from '../data/career';
+import type { OtherProject } from '../data/projects';
+
+interface Props {
+  locale: Locale;
+  project: OtherProject;
+}
+
+const { locale, project } = Astro.props;
+const t = getDictionary(locale);
+const texts = t.projects.others[project.id];
+const links = project.links.map((link) => ({
+  ...link,
+  label: fill(t.projects.ctxAria, {
+    employer: project.employer,
+    range: formatRange(getEntry(link.entry), t.career.present),
+  }),
+}));
+---
+
+<article class="proj" id={`p-${project.id}`}>
+  <div class="proj-head">
+    <h3>
+      {project.url ? (
+        <a class="ext" href={project.url} target="_blank" rel="noopener noreferrer">
+          {texts.title}
+          <Icon name="up-right" />
+          <span class="sr">{t.projects.liveSiteSr}</span>
+        </a>
+      ) : (
+        texts.title
+      )}
+    </h3>
+    <span class="when num">{project.when}</span>
+  </div>
+  {project.domain && <p class="domain">{project.domain}</p>}
+  <p>{texts.text}</p>
+  <TagList items={project.stack} label={t.projects.stackLabel} terms={t.terms} />
+  <p class="ctx-line">
+    <span class="k">{texts.context}</span>
+    {links.map((link) => (
+      <>
+        <span class="sep" aria-hidden="true">
+          ·
+        </span>
+        <a href={`#t-${link.entry}`} aria-label={link.label}>
+          {link.period}
+        </a>
+      </>
+    ))}
+  </p>
+</article>

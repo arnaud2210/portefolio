@@ -1,0 +1,30 @@
+---
+import '../styles/career.css';
+import Timeline from './Timeline.astro';
+import { getDictionary, type Locale } from '../i18n';
+import { education, experience } from '../data/career';
+import { sections } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section id={sections.career}>
+  <div class="wrap split">
+    <h2>{t.career.title}</h2>
+    <div>
+      <div class="tl-group">
+        <h3>{t.career.experienceTitle}</h3>
+        <Timeline locale={locale} entries={experience} />
+      </div>
+      <div class="tl-group">
+        <h3>{t.career.educationTitle}</h3>
+        <Timeline locale={locale} entries={education} />
+      </div>
+    </div>
+  </div>
+</section>

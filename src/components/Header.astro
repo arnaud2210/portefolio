@@ -1,0 +1,56 @@
+---
+import '../styles/header.css';
+import LangSwitch from './LangSwitch.astro';
+import { getDictionary, type Locale } from '../i18n';
+import { sections, site } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const links = [
+  { id: sections.projects, label: t.nav.projects },
+  { id: sections.career, label: t.nav.career },
+  { id: sections.skills, label: t.nav.skills },
+];
+---
+
+<header class="site-header">
+  <div class="wrap header-in">
+    <a class="brand" href={`#${sections.home}`}>
+      <span class="mono" aria-hidden="true">
+        {site.monogram}
+      </span>
+      {site.name}
+    </a>
+    <!-- Liens, bouton « Me contacter » et langue : rangée en bureau, panneau plein écran en mobile avec JS. -->
+    <div class="panel" id="menu">
+      <nav class="nav" id="nav" aria-label={t.nav.ariaLabel}>
+        {links.map((link) => (
+          <a href={`#${link.id}`}>{link.label}</a>
+        ))}
+      </nav>
+      <a class="nav-cta" href={`#${sections.contact}`}>
+        {t.nav.cta}
+      </a>
+      <LangSwitch locale={locale} />
+    </div>
+    <!-- Visible uniquement sous 768 px quand JS est actif ; icône seule sous 380 px. -->
+    <button
+      type="button"
+      class="menu-btn"
+      aria-expanded="false"
+      aria-controls="menu"
+      aria-label={t.nav.menu}
+    >
+      <svg class="ic ln" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path class="l1" d="M4 5h16"></path>
+        <path class="l2" d="M4 12h16"></path>
+        <path class="l3" d="M4 19h16"></path>
+      </svg>
+      <span aria-hidden="true">{t.nav.menu}</span>
+    </button>
+  </div>
+</header>

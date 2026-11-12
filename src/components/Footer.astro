@@ -1,0 +1,72 @@
+---
+import '../styles/footer.css';
+import Icon from './Icon.astro';
+import LangSwitch from './LangSwitch.astro';
+import { getDictionary, type Locale } from '../i18n';
+import { cvPath, sections, site } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const navLinks = [
+  { id: sections.projects, label: t.nav.projects },
+  { id: sections.career, label: t.nav.career },
+  { id: sections.skills, label: t.nav.skills },
+  { id: sections.contact, label: t.nav.contact },
+];
+const icons = [
+  { icon: 'mail', href: `mailto:${site.email}`, label: t.contact.emailAria, external: false },
+  { icon: 'linkedin', href: site.linkedin.url, label: t.contact.linkedinAria, external: true },
+  { icon: 'github', href: site.github.url, label: t.contact.githubAria, external: true },
+] as const;
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-id">
+        <p class="foot-name">{site.name}</p>
+        <p>{t.footer.role}</p>
+        <p>{t.footer.location}</p>
+      </div>
+      <nav class="foot-nav" aria-label={t.nav.footerAriaLabel}>
+        {navLinks.map((link) => (
+          <a href={`#${link.id}`}>{link.label}</a>
+        ))}
+      </nav>
+      <div class="foot-contact">
+        <ul class="foot-icons">
+          {icons.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-label={item.label}
+                rel={item.external ? 'noopener noreferrer' : undefined}
+              >
+                <Icon name={item.icon} />
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a class="link-cv" href={cvPath[locale]} download>
+          {t.hero.cv}
+        </a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>
+        © {year} {site.name}
+      </span>
+      <div class="foot-tools">
+        <LangSwitch locale={locale} />
+        <a class="to-top" href={`#${sections.home}`}>
+          {t.footer.toTop} <Icon name="arrow-up" />
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

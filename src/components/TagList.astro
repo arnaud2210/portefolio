@@ -1,0 +1,24 @@
+---
+import '../styles/tags.css';
+import Icon from './Icon.astro';
+import type { Dictionary } from '../i18n';
+import type { StackItem } from '../data/stack';
+
+interface Props {
+  items: readonly StackItem[];
+  label: string;
+  terms: Dictionary['terms'];
+}
+
+const { items, label, terms } = Astro.props;
+const name = (item: StackItem) => item.label ?? (item.term ? terms[item.term] : '');
+---
+
+<ul class="tags" aria-label={label}>
+  {items.map((item) => (
+    <li class:list={{ 'no-logo': !item.icon }}>
+      {item.icon && <Icon name={item.icon} />}
+      {name(item)}
+    </li>
+  ))}
+</ul>

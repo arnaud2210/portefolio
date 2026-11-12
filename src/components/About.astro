@@ -1,0 +1,19 @@
+---
+import '../styles/about.css';
+import { getDictionary, type Locale } from '../i18n';
+import { sections } from '../data/site';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<section id={sections.about}>
+  <div class="wrap split about">
+    <h2>{t.about.title}</h2>
+    <p>{t.about.text}</p>
+  </div>
+</section>

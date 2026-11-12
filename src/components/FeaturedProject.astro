@@ -1,0 +1,61 @@
+---
+import Icon from './Icon.astro';
+import TagList from './TagList.astro';
+import Showcase from './Showcase.astro';
+import { getDictionary, type Locale } from '../i18n';
+import { featuredProject } from '../data/projects';
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const t = getDictionary(locale);
+const f = t.projects.featured;
+const rows = [f.context, f.did, f.solution];
+---
+
+<article class="feature" id="p-commandes">
+  <span class="meta num">{f.meta}</span>
+  <h3>
+    <a class="ext" href={featuredProject.url} target="_blank" rel="noopener noreferrer">
+      {f.title}
+      <Icon name="up-right" />
+      <span class="sr">{f.linkSr}</span>
+    </a>
+  </h3>
+  <p class="domain">{featuredProject.domain}</p>
+  <p class="lead">{f.lead}</p>
+  <dl class="dl">
+    {rows.map((row) => (
+      <div>
+        <dt>{row.label}</dt>
+        <dd>{row.text}</dd>
+      </div>
+    ))}
+    <div>
+      <dt>{f.result.label}</dt>
+      <dd>
+        {f.result.text}
+        <span class="figs">
+          {f.result.figures.map((figure) => (
+            <span class="fig">
+              <b class="num">{figure.value}</b>
+              {figure.label}
+            </span>
+          ))}
+        </span>
+      </dd>
+    </div>
+  </dl>
+  <div class="stack-row">
+    <span class="stack-k" aria-hidden="true">
+      {t.projects.stackLabel}
+    </span>
+    <TagList items={featuredProject.stack} label={t.projects.stackLabel} terms={t.terms} />
+  </div>
+  {f.notes.map((note) => (
+    <p class="stack">{note}</p>
+  ))}
+  <Showcase texts={t.projects.showcase} />
+</article>
