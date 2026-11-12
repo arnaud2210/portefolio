@@ -77,6 +77,7 @@ Les versions exactes sont figées par `package-lock.json` (installation reproduc
 ## Prérequis
 
 - Node.js 22.23.4 ou plus récent (exigence d'Astro 7, aligné sur `engines` de `package.json` ; `.nvmrc` fourni) et npm.
+- Fins de ligne : LF sur toutes les plateformes, imposé par `.gitattributes` et `.prettierrc.json` (sous Windows, laisser `core.autocrlf` à `false` pour ce dépôt).
 
 ## Commandes
 

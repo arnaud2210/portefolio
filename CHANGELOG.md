@@ -8,6 +8,8 @@ Le format s'inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) 
 
 ### Ajouté
 
+- Fins de ligne LF imposées (`.gitattributes`, `endOfLine` Prettier) pour que le formatage passe sous Windows et en CI.
+
 - Titre de page « Arnaud Adjimon » (FR et EN).
 - Domaine `aadjimon.online` (hébergement Vercel, domaine chez Wayhost) : `site` Astro vaut `SITE_URL` ou `https://aadjimon.online` par défaut ; `canonical` et `hreflang` absolus.
 - Projet Astro statique avec TypeScript strict, ESLint, Prettier et vérification des types.
