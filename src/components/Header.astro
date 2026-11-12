@@ -25,7 +25,7 @@ const links = [
       </span>
       {site.name}
     </a>
-    <!-- Liens, bouton « Me contacter » et langue : rangée en bureau, panneau plein écran en mobile avec JS. -->
+    {/* Liens, bouton « Me contacter » et langue : rangée en bureau, panneau plein écran en mobile avec JS. */}
     <div class="panel" id="menu">
       <nav class="nav" id="nav" aria-label={t.nav.ariaLabel}>
         {links.map((link) => (
@@ -37,7 +37,7 @@ const links = [
       </a>
       <LangSwitch locale={locale} />
     </div>
-    <!-- Visible uniquement sous 768 px quand JS est actif ; icône seule sous 380 px. -->
+    {/* Visible uniquement sous 768 px quand JS est actif ; icône seule sous 380 px. */}
     <button
       type="button"
       class="menu-btn"
