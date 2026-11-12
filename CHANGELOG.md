@@ -10,11 +10,7 @@ Le format s'inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) 
 
 - Pipeline CI GitHub Actions (`checks` : `npm ci`, format, lint, build, `npm audit --omit=dev`), Dependabot (npm et GitHub Actions, vers `dev`) et `vercel.json` (en-têtes de sécurité, CSP stricte, cache des assets).
 - README : section « Intégration et déploiement continus ».
-
 - Fins de ligne LF imposées (`.gitattributes`, `endOfLine` Prettier) pour que le formatage passe sous Windows et en CI.
-
-- Titre de page « Arnaud Adjimon » (FR et EN).
-- Domaine `aadjimon.online` (hébergement Vercel, domaine chez Wayhost) : `site` Astro vaut `SITE_URL` ou `https://aadjimon.online` par défaut ; `canonical` et `hreflang` absolus.
 - Projet Astro statique avec TypeScript strict, ESLint, Prettier et vérification des types.
 - Routing i18n `/fr/` et `/en/`, page racine qui redirige vers la langue préférée (choix mémorisé), balises `hreflang`.
 - Dictionnaires `fr.ts` et `en.ts` typés ; aucun texte en dur dans les composants.
@@ -23,6 +19,11 @@ Le format s'inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) 
 - Images optimisées (AVIF / WebP) via `astro:assets`, police Inter auto-hébergée.
 - Boutons de CV pointant vers `/cv/arnaud-adjimon-cv-fr.pdf` et `/cv/arnaud-adjimon-cv-en.pdf`, versionnés dans `public/cv/`.
 - README et notices des licences tierces.
+
+### Modifié
+
+- Titre de page « Arnaud Adjimon » (FR et EN).
+- Domaine `aadjimon.online` (hébergement Vercel, domaine chez Wayhost) : `site` Astro vaut `SITE_URL` ou `https://aadjimon.online` par défaut ; `canonical` et `hreflang` absolus.
 
 ### Corrigé
 

@@ -49,7 +49,7 @@ Les versions exactes sont figées par `package-lock.json` (installation reproduc
 - **Sécurité des ressources** : aucun script ni style inline généré par le site (feuilles de style et scripts toujours externes), donc compatible avec une CSP stricte. Liens externes en `rel="noopener noreferrer"`.
 - **Pas de suivi** : aucun outil d'analyse, aucun cookie, aucune ressource tierce chargée à l'exécution.
 - **Accessibilité** : contrastes WCAG AA, navigation clavier, focus visible, lien d'évitement, `prefers-reduced-motion` respecté, menu mobile avec focus piégé.
-- **Hébergement** : sur Vercel, avec le nom de domaine `aadjimon.online` acheté chez Wayhost. Le site est servi à la racine du domaine : les chemins sont donc absolus (`/favicon.svg`, `/cv/…`). Un déploiement dans un sous-dossier demanderait de configurer `base` dans Astro et d'adapter ces chemins. `SITE_URL` vaut par défaut `https://aadjimon.online` (voir plus bas).
+- **Hébergement** : sur Vercel, avec le nom de domaine `aadjimon.online` acheté chez Wayhost. Le site est servi à la racine du domaine : les chemins sont donc absolus (`/favicon.svg`, `/cv/…`). Un déploiement dans un sous-dossier demanderait de configurer `base` dans Astro et d'adapter ces chemins. Pour `SITE_URL`, voir la section dédiée plus bas.
 - **Limite connue du menu mobile** : le menu est replié par une feuille de style conditionnée à `(scripting: enabled)`. Si le JavaScript est actif mais que le bundle ne se charge pas (réseau coupé en cours de chargement), le bouton du menu ne répond pas. Risque faible, accepté.
 
 ## Structure des dossiers
@@ -155,7 +155,7 @@ Mises à jour hebdomadaires (lundi) des dépendances `npm` et des actions GitHub
 
 ### Vercel et en-têtes (`vercel.json`)
 
-- Branche de production : `main` ; `dev` et les Pull Requests : previews protégées par Vercel Authentication. `SITE_URL` (`https://aadjimon.online`) est défini côté Vercel, en Production.
+- Branche de production : `main` ; `dev` et les Pull Requests : previews protégées par Vercel Authentication. `SITE_URL` est facultatif côté Vercel : la valeur par défaut de `astro.config.mjs` (`https://aadjimon.online`) est identique.
 - En-têtes de sécurité sur les pages : CSP stricte (aucune ressource tierce, aucun script ni style inline), HSTS (sans `preload`), `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`, `Cross-Origin-Opener-Policy`, `X-Frame-Options`.
 - Règle séparée pour `/cv/*.pdf` (la CSP `default-src 'none'` est évitée pour ne pas gêner le visionneur de PDF).
 - `/_astro/*` : cache long et immuable (fichiers au nom haché).
