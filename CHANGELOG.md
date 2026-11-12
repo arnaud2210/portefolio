@@ -8,6 +8,7 @@ Le format s'inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) 
 
 ### Ajouté
 
+- Aperçu de partage (LinkedIn, etc.) : balises Open Graph et `twitter:card` par langue, images `public/og/og-fr.jpg` et `og-en.jpg` (1200 × 630), URL absolues via `Astro.site`, textes dans `fr.ts` / `en.ts`. README : section « Métadonnées et aperçu de partage ».
 - Pipeline CI GitHub Actions (`checks` : `npm ci`, format, lint, build, `npm audit --omit=dev`), Dependabot (npm et GitHub Actions, vers `dev`) et `vercel.json` (en-têtes de sécurité, CSP stricte, cache des assets).
 - README : section « Intégration et déploiement continus ».
 - Fins de ligne LF imposées (`.gitattributes`, `endOfLine` Prettier) pour que le formatage passe sous Windows et en CI.
@@ -24,6 +25,7 @@ Le format s'inspire de [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) 
 
 - Titre de page « Arnaud Adjimon » (FR et EN).
 - Domaine `aadjimon.online` (hébergement Vercel, domaine chez Wayhost) : `site` Astro vaut `SITE_URL` ou `https://aadjimon.online` par défaut ; `canonical` et `hreflang` absolus.
+- HSTS : `includeSubDomains` retiré de `vercel.json` tant que les sous-domaines ne sont pas connus (`max-age=31536000`, sans `preload`).
 
 ### Corrigé
 

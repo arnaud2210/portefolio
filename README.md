@@ -96,6 +96,14 @@ npm run format:check  # vérifie le formatage sans modifier
 
 `SITE_URL` (facultative, défaut `https://aadjimon.online`) : lue à la compilation pour produire des URL absolues dans les balises `hreflang` et `canonical`. Elle peut être surchargée par une variable d'environnement Vercel. Les liens internes restent relatifs à la racine, donc les déploiements de prévisualisation Vercel fonctionnent ; seules ces balises utilisent le domaine.
 
+## Métadonnées et aperçu de partage
+
+Chaque page contient `title`, `description`, `canonical`, `hreflang` et les balises Open Graph / Twitter (`og:type`, `og:site_name`, `og:title`, `og:description`, `og:url`, `og:image` et ses dimensions, type et texte alternatif, `og:locale` et `og:locale:alternate`, `twitter:card` = `summary_large_image`). Elles sont produites dans `src/layouts/Base.astro` ; les textes (`og.imageAlt`, `og.locale`) sont dans `src/i18n/fr.ts` et `en.ts`. Aucun script ni ressource tierce n'est utilisé.
+
+- **Images** : `public/og/og-fr.jpg` et `public/og/og-en.jpg` (1200 × 630, JPEG sans métadonnées), servies telles quelles (pas de traitement Astro) pour garder une URL stable : `https://aadjimon.online/og/og-fr.jpg` et `.../og-en.jpg`. L'URL absolue est construite à partir de `site` (`SITE_URL`).
+- **Régénération** : les images ont été rendues depuis un gabarit HTML aux couleurs du site (bleu nuit, Inter), capturé en 1200 × 630 puis exporté en JPEG sans métadonnées. Pour les modifier, refaire le rendu depuis ce gabarit (non versionné), remplacer les deux fichiers en gardant les mêmes noms et dimensions, et vérifier l'absence d'EXIF.
+- **Cache des réseaux sociaux** : LinkedIn et d'autres mettent l'aperçu en cache ; après un changement d'image, forcer l'actualisation (ex. LinkedIn Post Inspector).
+
 ## CV (PDF)
 
 Les boutons « Télécharger mon CV » servent le CV de la langue de la page :
