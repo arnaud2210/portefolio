@@ -24,7 +24,13 @@ export const experience: CareerEntry[] = [
     projects: ['axmaril', 'wayhost'],
     anchor: true,
   },
-  { id: 'axetag-2025', from: '01/2025', to: '09/2025', projects: ['axmaril'], anchor: true },
+  {
+    id: 'axetag-2025',
+    from: '01/2025',
+    to: '09/2025',
+    projects: ['axmaril', 'wayhost'],
+    anchor: true,
+  },
   {
     id: 'axetag-2023',
     from: '10/2023',

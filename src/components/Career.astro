@@ -1,6 +1,7 @@
 ---
 import '../styles/career.css';
 import Timeline from './Timeline.astro';
+import Icon from './Icon.astro';
 import { getDictionary, type Locale } from '../i18n';
 import { education, experience } from '../data/career';
 import { sections } from '../data/site';
@@ -15,7 +16,10 @@ const t = getDictionary(locale);
 
 <section id={sections.career}>
   <div class="wrap split">
-    <h2>{t.career.title}</h2>
+    <h2>
+      <Icon name="route" class="sec-ic" />
+      {t.career.title}
+    </h2>
     <div>
       <div class="tl-group">
         <h3>{t.career.experienceTitle}</h3>

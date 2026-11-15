@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import { getDictionary, type Locale } from '../i18n';
+import type { OtherProject } from '../data/projects';
+
+interface Props {
+  locale: Locale;
+  project: OtherProject;
+  title: string;
+}
+
+const { locale, project, title } = Astro.props;
+const t = getDictionary(locale);
+---
+
+<div class="proj-head">
+  <h3>
+    {project.url ? (
+      <a class="ext" href={project.url} target="_blank" rel="noopener noreferrer">
+        {title}
+        <Icon name="up-right" />
+        <span class="sr">{t.projects.liveSiteSr}</span>
+      </a>
+    ) : (
+      title
+    )}
+  </h3>
+  <span class="when num">{project.when}</span>
+</div>
+{project.domain && <p class="domain">{project.domain}</p>}
