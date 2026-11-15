@@ -2,7 +2,7 @@
 import '../styles/skills.css';
 import Icon from './Icon.astro';
 import { getDictionary, type Locale } from '../i18n';
-import { notions, skillGroups, spokenLanguages } from '../data/skills';
+import { learning, notions, skillGroups, spokenLanguages } from '../data/skills';
 import { sections } from '../data/site';
 import type { StackItem } from '../data/stack';
 
@@ -17,7 +17,10 @@ const name = (item: StackItem) => item.label ?? (item.term ? t.terms[item.term] 
 
 <section id={sections.skills}>
   <div class="wrap split">
-    <h2>{t.skills.title}</h2>
+    <h2>
+      <Icon name="code-xml" class="sec-ic" />
+      {t.skills.title}
+    </h2>
     <div>
       {skillGroups.map((group) => (
         <div class="sk-group">
@@ -34,6 +37,26 @@ const name = (item: StackItem) => item.label ?? (item.term ? t.terms[item.term] 
       ))}
       <div class="sk-pair">
         <div class="sk-group">
+          <h3>{t.skills.notionsTitle}</h3>
+          <ul class="chips chips-soft">
+            {notions.map((item) => (
+              <li>
+                {item.icon && <Icon name={item.icon} />}
+                {name(item)}
+              </li>
+            ))}
+          </ul>
+          <p class="sk-note">{t.skills.notionsNote}</p>
+        </div>
+        <div class="sk-group">
+          <h3>{t.skills.learningTitle}</h3>
+          <ul class="chips chips-soft">
+            {learning.map((item) => (
+              <li>{name(item)}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="sk-group">
           <h3>{t.skills.languagesTitle}</h3>
           <ul class="chips chips-lang">
             {spokenLanguages.map((language) => (
@@ -48,18 +71,6 @@ const name = (item: StackItem) => item.label ?? (item.term ? t.terms[item.term] 
               </li>
             ))}
           </ul>
-        </div>
-        <div class="sk-group">
-          <h3>{t.skills.notionsTitle}</h3>
-          <ul class="chips chips-soft">
-            {notions.map((item) => (
-              <li>
-                {item.icon && <Icon name={item.icon} />}
-                {name(item)}
-              </li>
-            ))}
-          </ul>
-          <p class="sk-note">{t.skills.notionsNote}</p>
         </div>
       </div>
     </div>

@@ -2,7 +2,9 @@ import type { EntryId } from './career';
 import type { Dictionary } from '../i18n';
 import { stackTags, type StackItem } from './stack';
 
-export type OtherProjectId = keyof Dictionary['projects']['others'];
+export type ShortProjectId = keyof Dictionary['projects']['others'];
+export type CaseProjectId = keyof Dictionary['projects']['cases'];
+export type OtherProjectId = ShortProjectId | CaseProjectId;
 
 export interface ProjectLink {
   entry: EntryId;
@@ -10,8 +12,7 @@ export interface ProjectLink {
   period: string;
 }
 
-export interface OtherProject {
-  id: OtherProjectId;
+interface ProjectBase {
   /** Nom court utilisé dans les liens du parcours (« Projet : Axmaril »). */
   shortName: string;
   /** Nom de l'employeur ou du client, repris dans le libellé d'accessibilité des périodes. */
@@ -23,6 +24,20 @@ export interface OtherProject {
   links: ProjectLink[];
 }
 
+/** Fiche courte : un paragraphe de description. */
+export interface ShortProject extends ProjectBase {
+  format: 'short';
+  id: ShortProjectId;
+}
+
+/** Fiche au format B : contexte, rôle, réalisations, résultat. */
+export interface CaseProject extends ProjectBase {
+  format: 'case';
+  id: CaseProjectId;
+}
+
+export type OtherProject = ShortProject | CaseProject;
+
 export const featuredProject = {
   url: 'https://layoko-juice.onrender.com',
   domain: 'layoko-juice.onrender.com',
@@ -31,6 +46,7 @@ export const featuredProject = {
 
 export const otherProjects: OtherProject[] = [
   {
+    format: 'case',
     id: 'wayhost',
     shortName: 'Wayhost',
     employer: 'AXETAG',
@@ -40,10 +56,12 @@ export const otherProjects: OtherProject[] = [
     stack: stackTags.wayhost,
     links: [
       { entry: 'axetag-2023', period: '2023-2024' },
+      { entry: 'axetag-2025', period: '2025' },
       { entry: 'axetag-devsecops', period: '2025-2026' },
     ],
   },
   {
+    format: 'case',
     id: 'axmaril',
     shortName: 'Axmaril',
     employer: 'AXETAG',
@@ -58,6 +76,7 @@ export const otherProjects: OtherProject[] = [
     ],
   },
   {
+    format: 'short',
     id: 'dac',
     shortName: 'DAC Advice',
     employer: 'DAC Advice',
@@ -66,6 +85,7 @@ export const otherProjects: OtherProject[] = [
     links: [{ entry: 'dac', period: '2024' }],
   },
   {
+    format: 'short',
     id: 'exiola',
     shortName: 'Exiola',
     employer: 'Exiola',
@@ -74,6 +94,7 @@ export const otherProjects: OtherProject[] = [
     links: [{ entry: 'exiola', period: '2023' }],
   },
   {
+    format: 'short',
     id: 'insight',
     shortName: 'Insight',
     employer: 'Insight',

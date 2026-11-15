@@ -1,0 +1,35 @@
+---
+import { fill, getDictionary, type Locale } from '../i18n';
+import { formatRange, getEntry } from '../data/career';
+import type { OtherProject } from '../data/projects';
+
+interface Props {
+  locale: Locale;
+  project: OtherProject;
+  label: string;
+}
+
+const { locale, project, label } = Astro.props;
+const t = getDictionary(locale);
+const links = project.links.map((link) => ({
+  ...link,
+  label: fill(t.projects.ctxAria, {
+    employer: project.employer,
+    range: formatRange(getEntry(link.entry), t.career.present),
+  }),
+}));
+---
+
+<p class="ctx-line">
+  <span class="k">{label}</span>
+  {links.map((link) => (
+    <>
+      <span class="sep" aria-hidden="true">
+        ·
+      </span>
+      <a href={`#t-${link.entry}`} aria-label={link.label}>
+        {link.period}
+      </a>
+    </>
+  ))}
+</p>

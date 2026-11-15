@@ -1,5 +1,6 @@
 ---
 import '../styles/about.css';
+import Icon from './Icon.astro';
 import { getDictionary, type Locale } from '../i18n';
 import { sections } from '../data/site';
 
@@ -13,7 +14,10 @@ const t = getDictionary(locale);
 
 <section id={sections.about}>
   <div class="wrap split about">
-    <h2>{t.about.title}</h2>
+    <h2>
+      <Icon name="user" class="sec-ic" />
+      {t.about.title}
+    </h2>
     <p>{t.about.text}</p>
   </div>
 </section>

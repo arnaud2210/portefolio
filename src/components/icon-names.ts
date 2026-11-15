@@ -13,6 +13,10 @@ export const lineIcons = [
   'terminal',
   'bot',
   'uml',
+  'user',
+  'layers',
+  'route',
+  'code-xml',
 ] as const;
 
 /** Icônes pleines (Simple Icons, Bootstrap Icons). */

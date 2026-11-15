@@ -36,8 +36,9 @@ h1 {
   line-height: 1.5;
 }
 .pitch {
-  max-width: 36rem;
-  font-size: clamp(1.0625rem, 1rem + 0.35vw, 1.25rem);
+  max-width: 40rem;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+  line-height: 1.65;
 }
 .cta {
   display: flex;
