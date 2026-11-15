@@ -1,0 +1,60 @@
+---
+import ProjectContext from './ProjectContext.astro';
+import ProjectTitle from './ProjectTitle.astro';
+import TagList from './TagList.astro';
+import { getDictionary, type Locale } from '../i18n';
+import type { CaseProject } from '../data/projects';
+import type { CaseTexts } from '../i18n';
+
+interface Props {
+  locale: Locale;
+  project: CaseProject;
+}
+
+const { locale, project } = Astro.props;
+const t = getDictionary(locale);
+const labels = t.projects.caseLabels;
+const texts: CaseTexts = t.projects.cases[project.id];
+const rows = [
+  { label: labels.background, text: texts.background },
+  { label: labels.role, text: texts.role },
+];
+---
+
+<article class="proj cs" id={`p-${project.id}`}>
+  <ProjectTitle locale={locale} project={project} title={texts.title} />
+  <dl class="csl">
+    {rows.map((row) => (
+      <div>
+        <dt>{row.label}</dt>
+        <dd>{row.text}</dd>
+      </div>
+    ))}
+    <div>
+      <dt>{labels.achievements}</dt>
+      <dd>
+        <ul class="real">
+          {texts.achievements.map((item) => (
+            <li>
+              <b>{item.label}</b>
+              {labels.separator}
+              {item.text}
+            </li>
+          ))}
+        </ul>
+      </dd>
+    </div>
+    <div>
+      <dt>{labels.result}</dt>
+      <dd>{texts.result}</dd>
+    </div>
+  </dl>
+  <div class="stack-row">
+    <span class="stack-k" aria-hidden="true">
+      {t.projects.stackLabel}
+    </span>
+    <TagList items={project.stack} label={t.projects.stackLabel} terms={t.terms} />
+  </div>
+  {texts.ia && <p class="ia">{texts.ia}</p>}
+  <ProjectContext locale={locale} project={project} label={texts.context} />
+</article>

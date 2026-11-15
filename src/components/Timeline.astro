@@ -1,5 +1,5 @@
 ---
-import { getDictionary, type Locale } from '../i18n';
+import { getDictionary, type EntryTexts, type Locale } from '../i18n';
 import { formatRange, type CareerEntry } from '../data/career';
 import { getProjectShortName } from '../data/projects';
 
@@ -14,7 +14,7 @@ const t = getDictionary(locale);
 
 <ol class="tl">
   {entries.map((entry) => {
-    const texts = t.career.entries[entry.id];
+    const texts: EntryTexts = t.career.entries[entry.id];
     return (
       <li
         class:list={{ current: entry.current }}
@@ -25,7 +25,7 @@ const t = getDictionary(locale);
         <span class="what">
           {texts.what}
           <span class="where">{texts.where}</span>
-          <span class="note">{texts.note}</span>
+          {texts.note && <span class="note">{texts.note}</span>}
           {entry.projects && (
             <span class="links">
               {entry.projects.map((project) => (

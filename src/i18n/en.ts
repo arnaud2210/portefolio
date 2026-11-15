@@ -5,7 +5,7 @@ export const en: Dictionary = {
   meta: {
     title: 'Arnaud Adjimon',
     description:
-      'Arnaud Adjimon, Back-end Python / Full-stack Developer. I design APIs, web and mobile applications, from requirements analysis to production.',
+      'Arnaud Adjimon, back-end Python / full-stack developer based in Metz: APIs and web and mobile apps, from business needs to production.',
   },
   og: {
     locale: 'en_US',
@@ -33,14 +33,14 @@ export const en: Dictionary = {
   hero: {
     role: 'Back-end Python / Full-stack Developer',
     pitch:
-      '“I design APIs, web and mobile applications, from requirements analysis to production.”',
+      'I design and manage digital solutions, starting with business challenges, from understanding requirements and making architectural decisions right through to the development and deployment of APIs and web and mobile applications. My aim is to deliver reliable, scalable solutions that are useful to the business.',
     seeProjects: 'View my projects',
     cv: 'Download my CV',
     photoAlt: 'Portrait of Arnaud Adjimon',
   },
   about: {
     title: 'About',
-    text: "Back-end developer with 3 years of experience, holding a Master's degree in Web & Mobile Development (ÉSTIAM Metz, 2026). I have worked on vendor products (cybersecurity, cloud) as well as on projects for independent clients. I like understanding the need, designing a clean architecture, and delivering something that runs in production. I also share what I know: I teach a Python course for beginners.",
+    text: "A back-end developer for 3 years with a Master's degree in web and mobile development, I have worked on vendor products (cybersecurity, cloud) as well as on projects for independent clients, with a particular focus on application security. I also share what I know: I teach a Python course to beginners.",
   },
   projects: {
     title: 'Projects',
@@ -80,7 +80,7 @@ export const en: Dictionary = {
     },
     showcase: {
       webCaption: 'Ordering site (customers)',
-      mobileCaption: 'Management app (PWA): catalogue, order tracking, dashboard',
+      mobileCaption: 'Management app (PWA): catalog, order tracking, dashboard',
       phonesAria: 'Management app screenshots',
       enlarge: 'Enlarge',
       shots: {
@@ -89,8 +89,8 @@ export const en: Dictionary = {
           alt: 'Ordering site for customers: “Homemade natural juices” banner, search, category filters and juice cards with photo, price and add-to-cart button',
         },
         catalogue: {
-          caption: 'Management app: catalogue',
-          alt: 'Catalogue of the management app: list of juices with photo, price, volume and status, Edit and Delete buttons',
+          caption: 'Management app: catalog',
+          alt: 'Catalog of the management app: list of juices with photo, price, volume and status, Edit and Delete buttons',
         },
         commandes: {
           caption: 'Management app: orders',
@@ -108,30 +108,81 @@ export const en: Dictionary = {
         close: 'Close',
       },
     },
-    others: {
+    caseLabels: {
+      background: 'Background',
+      role: 'My role',
+      achievements: 'Achievements',
+      result: 'Result',
+      separator: ': ',
+    },
+    cases: {
       wayhost: {
         title: 'Wayhost, cloud platform',
-        text: 'Platform then called Altara (2023-2024). FastAPI microservices: domain names and DNS zones through OpenStack, virtual and physical servers, payment. Automated provisioning (SSH keys deployed when servers are created) and a secured GitLab CI/CD pipeline.',
         context: 'At AXETAG',
+        background:
+          'A platform designed by AXETAG with ITNET TECHNOLOGIES that lets businesses and professionals order and manage their infrastructure services (domains, DNS, virtual and physical servers) in one place, with automated provisioning.',
+        role: 'Back-end Python developer, then DevSecOps, in a back-end team of about ten developers, on Altara (2023-2024), then on Wayhost, its migration and redesign (2025-2026).',
+        achievements: [
+          {
+            label: 'Domain names',
+            text: 'design of the REST API architecture, OpenStack integration for DNS zones, created automatically on purchase.',
+          },
+          {
+            label: 'VPS servers',
+            text: 'management of passwords and SSH keys, deployed as soon as a server is created.',
+          },
+          {
+            label: 'Billing',
+            text: 'invoices generated after payment and sent automatically by email.',
+          },
+          {
+            label: 'Security and quality',
+            text: 'analysis and fixing of CVEs (DefectDojo), code analysis with Bandit, proposal of OWASP ZAP for automated security testing, unit and integration tests of the authentication microservice with pytest.',
+          },
+        ],
+        result:
+          'In production at wayhost.cloud. End-to-end domain purchase (search, pricing, suggestions, cart, payment), DNS zones and domain details, VPS and SSH keys, spending tracking in the customer area.',
       },
       axmaril: {
         title: 'Axmaril, digital vault',
-        text: 'Secure vault sharing, from requirements specification to production, and a Go sidecar agent that delivers secrets to third-party applications, with a cache for high availability.',
         context: 'At AXETAG',
+        background:
+          "A solution designed by AXETAG with ITNET TECHNOLOGIES to centralize, protect and share organizations' sensitive information (credentials, API keys, access rights, files). Applications get their secrets without storing them in their code or configuration.",
+        role: 'Back-end Python developer, then DevSecOps. I carried out the work below, from needs and requirements through to architecture, technical choices and production release.',
+        achievements: [
+          {
+            label: 'Axgent agent (Go, Linux servers)',
+            text: 'a sidecar agent that acts as a gateway between the vault and third-party applications; they get their secrets without depending directly on the central REST API.',
+          },
+          {
+            label: 'Cache',
+            text: 'fewer calls to the central service, and secrets that stay available during a temporary outage.',
+          },
+          {
+            label: 'Sharing',
+            text: 'secrets shared with internal and external users; vaults shared between users, groups and LDAP accounts, with predefined permissions.',
+          },
+          { label: 'Testing', text: 'unit and integration tests of the API with pytest.' },
+        ],
+        result:
+          'A commercial product, used by large corporations in France. Vault and secret sharing is in production, with group management. Axgent can be downloaded as a Linux binary: in their customer area, users create an agent and applications, assign vaults to applications, then link the applications to the agent.',
+        ia: 'Axgent: requirements specification and architecture designed by me, code written with the assistance of Claude Code.',
       },
+    },
+    others: {
       dac: {
         title: 'DAC Advice, multichannel e-commerce',
-        text: 'Telegram bot and Angular web application on a single FastAPI API (catalogue, cart), MongoDB database.',
+        text: 'Multichannel e-commerce system: a Telegram bot and an Angular web application rely on a single FastAPI REST API (catalog, cart). I designed the back-end architecture (UML modeling, MongoDB database), developed the API, then integrated it into the bot and the web interface.',
         context: 'At DAC Advice',
       },
       exiola: {
         title: 'Exiola, legal chatbot',
-        text: 'Assistant for a law firm on Telegram and WhatsApp (Botpress). FastAPI / MongoDB API to index documents, answers generated with OpenAI, Angular administration platform.',
+        text: 'Customer service chatbot for a law firm, on WhatsApp and Telegram (Botpress). I designed the architecture (UML modeling) and developed the FastAPI / MongoDB REST API, which indexes the legal documents the chatbot draws on through OpenAI. I also built an Angular administration platform to submit training documents and send bulk messages to clients.',
         context: 'At Exiola',
       },
       insight: {
         title: 'Insight, clinic management',
-        text: 'Management system for a clinic: billing of medical procedures and delivery of laboratory test results. Deployed for internal use.',
+        text: 'Clinic management web application with two modules: billing of medical procedures and tracking of laboratory test results. I built it with Django and PostgreSQL, with a Bootstrap interface and asynchronous interactions in AJAX. It is deployed for internal use.',
         context: 'At Insight',
       },
     },
@@ -151,17 +202,17 @@ export const en: Dictionary = {
       'axetag-devsecops': {
         what: 'DevSecOps Developer, AXETAG SAS',
         where: 'Cergy, France',
-        note: 'Go sidecar agent (Axmaril), Wayhost microservices, security stages in GitLab CI/CD pipelines.',
+        note: 'Axgent agent in Go (Axmaril), Wayhost microservices, CVE analysis and fixing in GitLab CI/CD pipelines.',
       },
       'axetag-2025': {
         what: 'Back-end Python Developer, AXETAG SAS',
         where: 'Cergy, France',
-        note: 'Secure vault sharing for Axmaril, Flask and FastAPI REST APIs, unit tests.',
+        note: 'Vault sharing for Axmaril (Flask), then migration and redesign of Altara into Wayhost (FastAPI), unit tests.',
       },
       'axetag-2023': {
         what: 'Back-end Python Developer, AXETAG SAS',
         where: 'Cotonou, Benin (remote)',
-        note: 'Flask / MongoDB REST API features for Axmaril and Altara (now Wayhost), maintenance, unit tests.',
+        note: 'Flask / MongoDB REST API features for Axmaril (secret sharing) and Altara (now Wayhost), maintenance, unit tests.',
       },
       dac: {
         what: 'Freelance Full-stack Developer, DAC Advice',
@@ -176,17 +227,15 @@ export const en: Dictionary = {
       insight: {
         what: 'Software Developer Intern, Insight',
         where: 'Lomé, Togo',
-        note: 'Clinic management system: billing of procedures and test results.',
+        note: 'Clinic management system: billing of procedures and tracking of laboratory tests.',
       },
       estiam: {
         what: "Master's degree in Web & Mobile Development (e-Industries track), ÉSTIAM Metz",
         where: 'Metz, France',
-        note: 'Web and mobile development.',
       },
       iai: {
         what: "Professional Bachelor's degree in Software Engineering and Information Systems (Licence pro Génie Logiciel et Systèmes d'Information), Institut Africain d'Informatique",
         where: 'Lomé, Togo',
-        note: 'Software engineering and information systems.',
       },
     },
   },
@@ -196,7 +245,10 @@ export const en: Dictionary = {
       backend: 'Back-end',
       frontMobile: 'Front-end and mobile',
       data: 'Data',
-      devsecops: 'DevSecOps and tools',
+      devops: 'DevOps and cloud',
+      security: 'Application security',
+      ai: 'AI and integrations',
+      quality: 'Quality and methods',
     },
     languagesTitle: 'Languages',
     languages: {
@@ -204,7 +256,8 @@ export const en: Dictionary = {
       en: { name: 'English', level: 'professional' },
     },
     notionsTitle: 'Familiar with',
-    notionsNote: 'Academic projects',
+    notionsNote: "Academic projects, professional bachelor's and master's",
+    learningTitle: 'Currently learning',
   },
   contact: {
     title: 'Contact',

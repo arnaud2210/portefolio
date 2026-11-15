@@ -23,8 +23,6 @@ export const skillGroups: { id: SkillGroupId; items: StackItem[] }[] = [
       { icon: 'react', label: 'React Native' },
       { icon: 'bootstrap', label: 'Bootstrap' },
       { icon: 'sync', label: 'AJAX' },
-      { icon: 'telegram', label: 'Telegram Bot API' },
-      { icon: 'whatsapp', label: 'WhatsApp API' },
     ],
   },
   {
@@ -37,25 +35,41 @@ export const skillGroups: { id: SkillGroupId; items: StackItem[] }[] = [
     ],
   },
   {
-    id: 'devsecops',
+    id: 'devops',
     items: [
       { icon: 'docker', label: 'Docker' },
       { icon: 'linux', label: 'Linux' },
       { icon: 'gitlab', label: 'GitLab CI/CD' },
+      { icon: 'github', label: 'GitHub Actions' },
       { icon: 'openstack', label: 'OpenStack' },
       { icon: 'terminal', label: 'SSH' },
-      { icon: 'shield', label: 'Semgrep' },
+    ],
+  },
+  {
+    id: 'security',
+    items: [
       { icon: 'shield', label: 'Bandit' },
       { icon: 'trivy', label: 'Trivy' },
       { icon: 'owasp', label: 'OWASP ZAP' },
       { icon: 'shield', label: 'DefectDojo' },
-      { icon: 'shield', label: 'Open Policy Agent' },
-      { icon: 'pytest', label: 'pytest' },
+    ],
+  },
+  {
+    id: 'ai',
+    items: [
       { icon: 'openai', label: 'OpenAI API' },
       { icon: 'bot', label: 'Botpress' },
       { icon: 'claude', label: 'Claude Code' },
-      { icon: 'sync', label: 'Agile' },
+      { icon: 'telegram', label: 'Telegram Bot API' },
+      { icon: 'whatsapp', label: 'WhatsApp API' },
+    ],
+  },
+  {
+    id: 'quality',
+    items: [
+      { icon: 'pytest', label: 'pytest' },
       { icon: 'uml', label: 'UML' },
+      { icon: 'sync', label: 'Agile' },
     ],
   },
 ];
@@ -70,3 +84,6 @@ export const notions: StackItem[] = [
   { icon: 'java', label: 'Java' },
   { icon: 'springboot', label: 'Spring Boot' },
 ];
+
+/** Technologies en cours d'apprentissage (pastille sans logo). */
+export const learning: StackItem[] = [{ label: 'Kubernetes' }];

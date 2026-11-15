@@ -7,7 +7,7 @@ export const fr = {
   meta: {
     title: 'Arnaud Adjimon',
     description:
-      "Arnaud Adjimon, développeur back-end Python / Fullstack. Je conçois des APIs et des applications web et mobile, de l'analyse du besoin à la mise en production.",
+      'Arnaud Adjimon, développeur back-end Python / Fullstack basé à Metz : API et applications web et mobiles, des enjeux métier à la mise en production.',
   },
   og: {
     locale: 'fr_FR',
@@ -35,14 +35,14 @@ export const fr = {
   hero: {
     role: 'Développeur back-end Python / Fullstack',
     pitch:
-      "« Je conçois des APIs et des applications web et mobile, de l'analyse du besoin à la mise en production. »",
+      "Je conçois et pilote des solutions numériques en partant des enjeux métier, de la compréhension du besoin aux choix d'architecture, jusqu'au développement et à la mise en production d'API et d'applications web et mobiles. Mon objectif : des solutions fiables, évolutives et utiles aux métiers.",
     seeProjects: 'Voir mes projets',
     cv: 'Télécharger mon CV',
     photoAlt: 'Arnaud Adjimon',
   },
   about: {
     title: 'À propos',
-    text: "Développeur back-end avec 3 ans d'expérience, diplômé d'un Master Développement Web et Mobile (ÉSTIAM Metz, 2026). J'ai travaillé sur des produits éditeur (cybersécurité, cloud) comme sur des projets pour des clients indépendants. J'aime comprendre le besoin, concevoir une architecture propre, et livrer quelque chose qui tourne en production. Je transmets aussi ce que je sais : j'anime une formation Python pour débutants.",
+    text: "Développeur back-end depuis 3 ans et diplômé d'un Master en développement web et mobile, j'ai travaillé sur des produits éditeur (cybersécurité, cloud) comme sur des projets pour des clients indépendants, avec une attention particulière à la sécurité applicative. Je transmets aussi ce que je sais : j'anime une formation Python pour débutants.",
   },
   projects: {
     title: 'Projets',
@@ -111,30 +111,81 @@ export const fr = {
         close: 'Fermer',
       },
     },
-    others: {
+    caseLabels: {
+      background: 'Contexte',
+      role: 'Mon rôle',
+      achievements: 'Réalisations',
+      result: 'Résultat',
+      separator: ' : ',
+    },
+    cases: {
       wayhost: {
         title: 'Wayhost, plateforme cloud',
-        text: 'Plateforme alors nommée Altara (2023-2024). Microservices FastAPI : noms de domaine et zones DNS via OpenStack, serveurs virtuels et physiques, paiement. Provisionnement automatisé (clés SSH déployées à la création des serveurs) et pipeline GitLab CI/CD sécurisé.',
         context: 'Chez AXETAG',
+        background:
+          "Plateforme conçue par AXETAG avec ITNET TECHNOLOGIES, qui permet aux entreprises et aux professionnels de commander et de gérer au même endroit leurs services d'infrastructure (domaines, DNS, serveurs virtuels et physiques), avec une mise à disposition automatisée.",
+        role: "Développeur back-end Python puis DevSecOps, dans l'équipe back-end d'une dizaine de développeurs, sur Altara (2023-2024), puis sur Wayhost, sa migration et refonte (2025-2026).",
+        achievements: [
+          {
+            label: 'Noms de domaine',
+            text: "conception de l'architecture de l'API REST, intégration d'OpenStack pour les zones DNS, créées automatiquement à l'achat.",
+          },
+          {
+            label: 'Serveurs VPS',
+            text: 'gestion des mots de passe et des clés SSH, déployées dès la création.',
+          },
+          {
+            label: 'Facturation',
+            text: 'génération des factures après paiement et envoi automatique par e-mail.',
+          },
+          {
+            label: 'Sécurité et qualité',
+            text: "analyse et correction des CVE (DefectDojo), analyse du code avec Bandit, proposition d'OWASP ZAP pour les tests de sécurité automatisés, tests unitaires et d'intégration du microservice d'authentification avec pytest.",
+          },
+        ],
+        result:
+          "En production sur wayhost.cloud. Achat d'un domaine de bout en bout (recherche, prix, suggestions, panier, paiement), zones DNS et détail des domaines, VPS et clés SSH, suivi des dépenses dans l'espace client.",
       },
       axmaril: {
         title: 'Axmaril, coffre-fort numérique',
-        text: 'Partage sécurisé de coffres-forts, du cahier des charges à la mise en production, et agent sidecar en Go qui distribue les secrets aux applications tierces, avec cache pour la haute disponibilité.',
         context: 'Chez AXETAG',
+        background:
+          "Solution conçue par AXETAG avec ITNET TECHNOLOGIES pour centraliser, protéger et partager les informations sensibles des organisations (identifiants, clés d'API, accès, fichiers). Les applications consomment leurs secrets sans les stocker dans leur code ni dans leur configuration.",
+        role: "Développeur back-end Python puis DevSecOps. J'ai réalisé les travaux ci-dessous, des besoins et des exigences jusqu'à l'architecture, aux choix techniques et à la mise en production.",
+        achievements: [
+          {
+            label: 'Agent Axgent (Go, serveurs Linux)',
+            text: "agent sidecar qui sert de passerelle entre le coffre-fort et les applications tierces ; elles obtiennent leurs secrets sans dépendre directement de l'API REST centrale.",
+          },
+          {
+            label: 'Cache',
+            text: "moins d'appels au service central, et des secrets toujours disponibles en cas de panne temporaire.",
+          },
+          {
+            label: 'Partage',
+            text: 'secrets partagés avec des utilisateurs internes et externes ; coffres partagés entre utilisateurs, groupes et comptes LDAP, avec des droits prédéfinis.',
+          },
+          { label: 'Tests', text: "tests unitaires et d'intégration de l'API avec pytest." },
+        ],
+        result:
+          "Produit commercialisé, utilisé par de grands groupes en France. Le partage de coffres et de secrets est en production, avec la gestion des groupes. Axgent est téléchargeable en binaire pour Linux : dans son espace client, on crée un agent et des applications, on affecte des coffres aux applications, puis on relie les applications à l'agent.",
+        ia: "Axgent : cahier des charges et architecture conçus par mes soins, code rédigé avec l'assistance de Claude Code.",
       },
+    },
+    others: {
       dac: {
         title: 'DAC Advice, e-commerce multicanal',
-        text: 'Bot Telegram et application web Angular sur une même API FastAPI (catalogue, panier), base MongoDB.',
+        text: "Système e-commerce multicanal : un bot Telegram et une application web Angular s'appuient sur une même API REST FastAPI (catalogue, panier). J'ai conçu l'architecture back-end (modélisation UML, base MongoDB), développé l'API, puis je l'ai intégrée au bot et à l'interface web.",
         context: 'Chez DAC Advice',
       },
       exiola: {
         title: 'Exiola, chatbot juridique',
-        text: "Assistant pour un cabinet d'avocats sur Telegram et WhatsApp (Botpress). API FastAPI / MongoDB pour indexer les documents, réponses via OpenAI, plateforme d'administration Angular.",
+        text: "Chatbot d'assistance à la relation client pour un cabinet d'avocats, sur WhatsApp et Telegram (Botpress). J'ai conçu l'architecture (modélisation UML) et développé l'API REST FastAPI / MongoDB, qui indexe les documents juridiques exploités par le chatbot via OpenAI. J'ai aussi réalisé une plateforme d'administration Angular, pour soumettre les documents d'entraînement et envoyer des messages groupés aux clients.",
         context: 'Chez Exiola',
       },
       insight: {
         title: 'Insight, gestion de clinique',
-        text: "Système de gestion pour une clinique : facturation des actes médicaux et délivrance des résultats d'analyses du laboratoire. Déployé en usage interne.",
+        text: "Application web de gestion de clinique en deux modules : facturation des actes médicaux et suivi des analyses du laboratoire. Je l'ai développée avec Django et PostgreSQL, avec une interface Bootstrap et des interactions asynchrones en AJAX. Elle est déployée en usage interne.",
         context: 'Chez Insight',
       },
     },
@@ -154,17 +205,17 @@ export const fr = {
       'axetag-devsecops': {
         what: 'Développeur DevSecOps, AXETAG SAS',
         where: 'Cergy, France',
-        note: 'Agent sidecar Go (Axmaril), microservices Wayhost, étapes de sécurité dans les pipelines GitLab CI/CD.',
+        note: 'Agent Axgent en Go (Axmaril), microservices Wayhost, analyse et correction des CVE dans les pipelines GitLab CI/CD.',
       },
       'axetag-2025': {
         what: 'Développeur Backend Python, AXETAG SAS',
         where: 'Cergy, France',
-        note: "Partage sécurisé de coffres-forts d'Axmaril, API REST Flask et FastAPI, tests unitaires.",
+        note: "Partage de coffres-forts d'Axmaril (Flask), puis migration et refonte d'Altara en Wayhost (FastAPI), tests unitaires.",
       },
       'axetag-2023': {
         what: 'Développeur Backend Python, AXETAG SAS',
         where: 'Cotonou, Bénin (à distance)',
-        note: 'Fonctionnalités API REST Flask / MongoDB pour Axmaril et Altara (devenu Wayhost), maintenance, tests unitaires.',
+        note: "Fonctionnalités d'API REST Flask / MongoDB pour Axmaril (partage de secrets) et Altara (devenu Wayhost), maintenance, tests unitaires.",
       },
       dac: {
         what: 'Développeur Fullstack freelance, DAC Advice',
@@ -179,17 +230,15 @@ export const fr = {
       insight: {
         what: 'Stagiaire développeur logiciel, Insight',
         where: 'Lomé, Togo',
-        note: "Système de gestion de clinique : facturation des actes et résultats d'analyses.",
+        note: 'Système de gestion de clinique : facturation des actes et suivi des analyses du laboratoire.',
       },
       estiam: {
         what: 'Master Développement Web et Mobile, cursus e-Industries, ÉSTIAM Metz',
         where: 'Metz, France',
-        note: 'Développement web et mobile.',
       },
       iai: {
         what: "Licence pro Génie Logiciel et Systèmes d'Information, Institut Africain d'Informatique",
         where: 'Lomé, Togo',
-        note: "Génie logiciel et systèmes d'information.",
       },
     },
   },
@@ -199,7 +248,10 @@ export const fr = {
       backend: 'Back-end',
       frontMobile: 'Front et mobile',
       data: 'Données',
-      devsecops: 'DevSecOps et outils',
+      devops: 'DevOps et cloud',
+      security: 'Sécurité applicative',
+      ai: 'IA et intégrations',
+      quality: 'Qualité et méthodes',
     },
     languagesTitle: 'Langues',
     languages: {
@@ -207,7 +259,8 @@ export const fr = {
       en: { name: 'Anglais', level: 'professionnel' },
     },
     notionsTitle: 'Notions',
-    notionsNote: 'Projets académiques',
+    notionsNote: 'Projets académiques, licence pro et master',
+    learningTitle: "En cours d'apprentissage",
   },
   contact: {
     title: 'Contact',

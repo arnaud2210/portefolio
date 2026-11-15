@@ -23,10 +23,17 @@ export const stackTags = {
   wayhost: [
     { icon: 'fastapi', label: 'FastAPI' },
     { icon: 'openstack', label: 'OpenStack' },
+    { icon: 'docker', label: 'Docker' },
     { icon: 'gitlab', label: 'GitLab CI/CD' },
-    { icon: 'blocks', label: 'Microservices' },
+    { icon: 'pytest', label: 'pytest' },
+    { icon: 'shield', label: 'Bandit' },
   ],
-  axmaril: [{ icon: 'go', label: 'Go' }, { label: 'Sidecar' }],
+  axmaril: [
+    { icon: 'python', label: 'Python' },
+    { icon: 'flask', label: 'Flask' },
+    { icon: 'go', label: 'Go' },
+    { icon: 'pytest', label: 'pytest' },
+  ],
   dac: [
     { icon: 'fastapi', label: 'FastAPI' },
     { icon: 'angular', label: 'Angular' },
